@@ -68,6 +68,8 @@
 
     .hero__image {
       margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
       
       img {
         box-shadow: none;
