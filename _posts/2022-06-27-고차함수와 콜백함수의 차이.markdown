@@ -1,0 +1,92 @@
+---
+layout: post
+title:  Moving to a new place
+date:   2022-06-27 01:10:00 +0300
+image:  05.jpg
+tags:   JavaScript
+---
+
+예전에 [고차함수](https://google.com, "google link")에 관해 다른 블로그에서 정리한 적이 있었다.
+
+그동안 프로젝트 구현에만 몰두하다 직원 동료와 대화 도중 고차함수와 콜백함수를 순간 헷갈려 부끄러웠는데,, 이번 기회 다시 재정리하고자 한다.
+
+## 함수의 특성 분리
+
+```javascript
+
+function city(arr) {
+  for(let i=0; i<arr.length; i++) console.log(arr[i])
+}
+
+function city(arr) {
+  const usa_city = arr.filter((el) => el === "new york")
+  console.log(usa_city[0])
+}
+
+city(["seoul", "tokyo", "london", "new york", "paris"])
+
+```
+
+한 함수는 모든 배열 요소의 값들을 추출하지만, 다른 함수는 하나의 요소만 필터링하는 특성이 있다.
+
+이럴 경우 각 함수의 특성을 분리할 수 있다.
+
+```javascript
+function city(arr ,func) {
+  return func(arr)
+}
+
+const wolrd = (arr) => {
+ for(let i=0; i<arr.length; i++) console.log(arr[i])
+}
+
+const usa = (arr) => {
+  const usa_city = arr.filter((el) => el === "new york")
+  console.log(city[0])
+}
+
+# TYPE 1
+city(["seoul", "tokyo", "london", "new york", "paris"], usa) 
+// new york
+
+# TYPE2
+city(["seoul", "tokyo", "london", "new york", "paris"], wolrd)
+ // seoul tokyo london new york paris
+
+```
+
+위 코드에서 분리된 함수를 통해 우리는 고차함수와 콜백함수를 구별할 수 있다.
+
+## 고차 함수
+
+> 함수를 인자로 받는 함수, 또한 함수를 반환하는 함수(외부 변수 접근 시 클로저 특성 보유)
+
+city 함수는 __인자(매개변수)를 함수__ 로 받았으며, 만일 __함수 스코프 상에서 내부 함수가 반환__ 된다면 고차함수가 된다.
+
+```javascript
+
+function city(arr ,func) {
+  return func(arr)
+}
+
+```
+
+## 콜백 함수
+
+> 매개변수를 통해 다른 함수의 내부로 전달되는 함수를 콜백 함수
+
+wolrd, usa_city의 함수는 고차 함수인 city에게 매개변수로 전달 받았다.
+
+
+```javascript
+
+const wolrd = (arr) => {
+ for(let i=0; i<arr.length; i++) console.log(arr[i])
+}
+
+const usa = (arr) => {
+  const usa_city = arr.filter((el) => el === "new york")
+  console.log(city[0])
+}
+
+```
