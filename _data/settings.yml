@@ -21,7 +21,7 @@ github: https://github.com/CaliforniaLuv
 
 #-------------------------------
 # Comment Section (Disqus)
-disqus-identifier: mr-brown # add your shortname for Disqus Comment. For example mr-brown
+# disqus-identifier: mr-brown # add your shortname for Disqus Comment. For example mr-brown
 
 
 #-------------------------------
