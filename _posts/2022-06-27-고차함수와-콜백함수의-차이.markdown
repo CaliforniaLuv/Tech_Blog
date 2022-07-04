@@ -2,7 +2,7 @@
 layout: post
 title:  고차함수와 콜백함수의 차이
 date:   2022-06-27 01:10:00 +0300
-image:  05.jpg
+image:  Javascript.png
 tags:   JavaScript
 ---
 
