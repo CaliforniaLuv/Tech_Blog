@@ -2,7 +2,7 @@
 layout: post
 title:  setTimeout와 requestAnimationFrame
 date:   2022-07-03 13:10:00 +0300
-image:  05.jpg
+image:  Javascript.png
 tags:   JavaScript
 ---
 
