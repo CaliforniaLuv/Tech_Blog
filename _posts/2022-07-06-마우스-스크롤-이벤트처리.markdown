@@ -1,0 +1,103 @@
+---
+layout: post
+title:  마우스 스크롤 이벤트 처리
+date:   2022-07-06 13:10:00 +0300
+image:  Javascript.png
+tags:   JavaScript
+---
+
+스크롤 이벤트 처리를 할 경우, __일반적인 순수 Y축 값을 통해 측정__, __setTimeout을 사용하여 throttle 처리__, __requestAnimationFrame__
+
+3가지 방법을 각각 비교하여 어떤 차이가 있는지 비교하자.
+
+---
+
+# 순수 스크롤 이벤트를 통한 Y축 값 측정
+
+{% highlight js %}
+
+const [scrollFlag, setScrollFlag] = useState(false);
+
+const handleScroll = () => {
+    const { scrollY } = window;
+    const isScrolled = scrollY !== 0;
+    // console.log(scrollY);
+    setScrollFlag(isScrolled);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+
+{% endhighlight %}
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/78064720/177378869-392e7546-0ae1-4d76-8a3f-668bd7bb2ecb.gif)
+
+
+스크롤을 내릴때 상당히 많은 값들이 측정된다. 
+
+만일 setState이 연쇄적으로 변경이 필요한 함수일 경우 불필요한 재렌더링이 동작되어
+
+브라우저 성능에 악영향을 줄 수도 있다.
+
+--- 
+
+# setTimeout을 이용한 throttle 처리
+
+{% highlight js %}
+
+  const [scrollFlag, setScrollFlag] = useState(false);
+
+  const updateScroll = () => {
+    const { scrollY } = window;
+    const isScrolled = scrollY !== 0;
+    console.log(scrollY);
+    setScrollFlag(isScrolled);
+  };
+  
+    const throttle = (callback, delay) => {
+    let timer = null;
+
+    // 클로저 함수 발동
+    return () => {
+      // 중복 방지 (두번 셋타임 들어가 콜백 부르기에 비효율적 이므로)
+      if (timer) return;
+      timer = setTimeout(() => {
+        callback();
+        timer = null;
+      }, delay);
+      // console.log("###", timer);
+    };
+  };
+  
+  const handleScroll = throttle(updateScroll, 100);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+
+{% endhighlight %}
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/78064720/177379847-a0c4e3c2-cfaa-4a12-b5de-84015a9549e7.gif)
+
+스크롤을 내릴 경우, 100ms 마다 throttle 함수가 동작되어 반환되므로, 
+
+빠른 속도로 실행되는 scroll 이벤트를 제어할 수 있다.
+
+그러나 이 방법은 [지난 블로그 포스트](https://californialuv.github.io/Tech_Blog/2022/07/03/setTimeout%EC%99%80-requestAnimationFrame/)에서도 언급했듯,
+
+__사용자 모니터의 성능에 따라__ 100ms의 제어를 못할 수도 있게 된다. 
+
+물론 단순 Y축 값 0이 아닌 경우에 따라 css 효과가 단순하게 바뀌는 경우, throttle 처리는 큰 문제가 없다.
+
+하지만, 애니메이션 효과가 연쇄적인 css 처리가 진행된다면 큰 문제가 발생한다.
+
+
