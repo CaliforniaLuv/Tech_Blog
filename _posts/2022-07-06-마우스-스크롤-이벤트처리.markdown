@@ -101,3 +101,65 @@ __사용자 모니터의 성능에 따라__ 100ms의 제어를 못할 수도 있
 하지만, 애니메이션 효과가 연쇄적인 css 처리가 진행된다면 큰 문제가 발생한다.
 
 
+--- 
+
+# requestAnimationFrame
+
+{% highlight js %}
+ const [scrollFlag, setScrollFlag] = useState(false);
+
+  const updateScroll = () => {
+    const { scrollY } = window;
+    const isScrolled = scrollY !== 0;
+    console.log(scrollY);
+    setScrollFlag(isScrolled);
+  };
+
+  const task = (callback) => {
+    let tick = false;
+
+    if (tick) {
+      return;
+    }
+
+    return () => {
+      tick = true;
+      return requestAnimationFrame(() => {
+        tick = false;
+        return callback();
+      });
+    };
+  };
+
+  const handleScroll = task(updateScroll);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+{% endhighlight %}
+
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/78064720/177607264-57023f34-ce71-46cb-9ac6-ab87de8e70c1.gif)
+
+모니터 hz 성능에 알맞도록 더 정교하게 측정되었다.
+
+setTimeout처럼 임의로 시간을 안맞추어도 좀 더 자연스럽게 브라우저가 적절한 타이밍에 조절해주게 된다.
+
+그러나 이 방법은 canvas, svg 등 __복잡한 애니메이션__ 을 다룰 때 쓰이는 방법이지, 
+
+단지 스크롤 값을 일시적으로 측정하여 발생하는 트리거라면 오히려 setTimeout이 더 효과적이다.
+
+## requestAnimationFrame 사용한 Header 트리거 이벤트
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/78064720/177606753-61ee84cf-56d1-4fe6-96d7-15af2ead90f1.gif)
+
+너무 정교하게 잡은 까닭에 state 변경이 처리되기 전, y축 값이 여러번 측정되어 버벅이는 현상을 발견할 수 있다.
+
+## setTimeout을 사용한 Header 트리거 이벤트
+
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/78064720/177607196-1d24108d-36b8-471f-a0ed-1f1e9de01bef.gif)
+
+
