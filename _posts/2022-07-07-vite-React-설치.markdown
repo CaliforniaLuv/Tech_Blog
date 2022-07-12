@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  vite React 설치
-date:   2022-06-27 01:10:00 +0300
+date:   2022-07-07 01:10:00 +0300
 image:  Javascript.png
 tags:   Tech
 ---
