@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  vite React 설치
+title:  useEffect Rule
 date:   2022-07-13 01:10:00 +0300
 image:  Javascript.png
 tags:   React
@@ -19,6 +19,7 @@ React Hook "useEffect"는 조건부로 호출됩니다. React Hooks는 모든 �
 
 useEffect는 아래와 같은 코드로 작성하였을 경우 에러가 발생한다. 
 
+---
 
 # 조건문 스코프 에러
 
@@ -72,7 +73,7 @@ export default function App() {
 
 {% endhighlight %}
 
---
+---
 
 # 최상단 조건문 에러
 
@@ -108,6 +109,8 @@ export default function App() {
 
 ## 에러 해결
 
+{% highlight js %}
+
 import React, {useEffect, useState} from 'react';
 
 export default function App() {
@@ -128,3 +131,11 @@ export default function App() {
     </div>
   );
 }
+{% endhighlight %}
+  
+---
+  
+# 결론 
+  
+1. React Hook은 항상 최상위에 위치되어 있어야 한다.
+2. 루프, 조건 또는 중첩 함수 내에서 useEffect 사용하면 안된다.
