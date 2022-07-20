@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  useEffect Rule
-date:   2022-07-13 01:10:00 +0300
+title:  컴파일과 런타임의 차이
+date:   2022-07-21 01:10:00 +0300
 image:  Javascript.png
 tags:   Tech
 ---
