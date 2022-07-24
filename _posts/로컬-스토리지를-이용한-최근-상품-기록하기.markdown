@@ -1,0 +1,122 @@
+---
+layout: post
+title:  로컬 스토리지를 이용한 최근 본 상품 기록하기
+date:   2022-07-24 14:26:00 +0300
+image:  Javascript.png
+tags:   Javascript
+---
+
+서비스 제품을 제공하는 웹 플랫폼에서 최근 본 제품들을 시각적으로 보여주는 기능들이 있다.
+
+현재 진행 중인 회사 프로젝트 서비스에서도 조회했던 상품들을 보여줘야 하는 기능이 있어,
+
+이번 시간 어떻게 구현하였는지 소개하고자 한다.
+
+---
+
+# 최근 본 상품들 기록하는 방법
+
+
+조회했던 제품들을 저장하기 위해서 세 가지 방법이 있다.
+
+1. ___DB___ 에 저장하여 해당 유저에게 제공해준다.
+2. http 요청/응답 과정을 통해 ___쿠키___ 에 저장하여 제공해준다.
+3. 웹 브라우저 메모리 공간인 ___로컬 스토리지___ 에 저장하여 제공해준다.
+
+위 세 가지 중 효율성과 단순함이 가장 좋아보이는 로컬 스토리지를 선택하였다.
+
+왜냐하면 DB는 백엔드 작업까지 가야할 절차가 많은 불편함이 있고,
+
+쿠키는 HTTP 요청/응답을 통해 저장해야 하므로 서버와 불필요한 트래픽 낭비가 일어날 수 있고,
+로컬 스토리지 저장 공간이 5MB인 점에 비해 쿠키는 4KB 라는 제한적인 용량을 보유하고 있다.
+
+---
+
+# 코드 구현 
+
+{% highlight js %}
+
+useEffect(() => {
+    if (data?.db?.id) {
+      let local = localStorage.getItem("plant_history");
+
+      if (local == null) {
+        local = [];
+      } else {
+        local = JSON.parse(local);
+      }
+      local.push(data?.db?.id);
+
+      local = new Set(local);
+      local = [...local];
+
+      if (local.length > 9) {
+        local.shift();
+      }
+
+      localStorage.setItem("plant_history", JSON.stringify(local));
+    }
+  }, [data?.db?.id]);
+
+{% endhighlight %}
+
+
+## 구현 단계 설명
+
+
+
+### step 1
+
+```
+
+let local = localStorage.getItem("plant_history");
+
+if(null) {
+  local = []
+} else {
+  local = JSON.parse(local);
+}
+
+```
+
+1. plant_history 스토리지를 조회(getItem)하여 local이라는 변수에 할당한다.
+2. 만일 존재하지 않다면 null 상태이므로 빈 배열을 생성하고, 존재한다면 parse 처리 한다.
+
+
+### step 2
+
+```
+
+local.push(data?.db?.id);
+
+local = new Set(local);
+local = [...local];
+
+```
+
+1. data.db.id는 해당 제품의 id이므로 배열에 담는다.
+2. 만일 이미 배열에 존재할 경우 new Set으로 중복 id를 제거한다. (제일 늦게 등록된 중복 요소가 제거)
+
+
+### step 3
+
+```
+
+if (local.length > 9) {
+   local.shift();
+}
+
+```
+
+1. 최근 본 제품들의 제한 갯수는 9개 이므로 이미 초과된 경우 첫번째 배열 요소를 제거한다.
+2. 이는 자료구조 Queue 방법론에 해당된다.
+
+### step 4
+
+```
+
+localStorage.setItem("plant_history", JSON.stringify(local));
+
+```
+
+1. 최종적으로 local이라는 배열을 stringify 문자열 처리하여 로컬 스토리지에 저장한다.(setItem)
