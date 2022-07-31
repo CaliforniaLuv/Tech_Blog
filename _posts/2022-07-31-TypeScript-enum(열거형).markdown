@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  로컬 스토리지를 이용한 최근 본 상품 기록하기
+title:  TypeScript enum(열거형)
 date:   2022-07-31 17:10:00 +0300
 image:  TypeScript.png
 tags:   TypeScript
