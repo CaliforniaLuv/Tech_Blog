@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  로컬 스토리지를 이용한 최근 본 상품 기록하기
+title: TypeScript 튜플
 date:   2022-07-28 01:17:00 +0300
 image:  TypeScript.png
 tags:   TypeScript
