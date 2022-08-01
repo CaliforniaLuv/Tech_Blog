@@ -16,9 +16,9 @@ tags:   TypeScript
 
 ---
 
- # 자바스크립트의 불편한점
+# 자바스크립트의 불편한점
  
- ## 변수로 저장
+## 변수로 저장
  
   {% highlight js %}
   
@@ -31,7 +31,7 @@ tags:   TypeScript
   
   이런 형태로 쓰면 직관적이긴 하나 너무 방대하기에 코드가 스파게티 코드로 꼬일게 분명하다.
   
-  ## 객체 형태로 저장
+ ## 객체 형태로 저장
    
    
   {% highlight js %}
@@ -50,7 +50,7 @@ tags:   TypeScript
    
 --- 
 
- # enum 활용하기
+# enum 활용하기
  
    {% highlight js %}
    
