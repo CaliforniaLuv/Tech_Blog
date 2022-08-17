@@ -1,0 +1,62 @@
+---
+layout: post
+title:  React 유닛 테스트(TDD)
+date:   2022-08-18 00:3:00 +0300
+image:  Javascript.png
+tags:   Javascript
+---
+
+
+프로젝트 CBT 단계가 끝날 무렵 회사 주간 회의에서 유닛 테스트 진행을 해봤냐는 질문을 받았다.
+
+그 동안 작업에만 몰두한다고 한 번도 코드 검사를 하지 않은 관계로 
+
+이번 시간에는 React 웹팩을 설치하면 기본 탑재되어 있는 __Jest__, __react-testing-library__ 를 활용하여 TDD 작업을 해보자.
+
+
+---
+
+#  Behavior Driven Test(행위 주도 테스트)와 Implementation Driven Test(구현 주도 테스트)
+
+react-testing-library를 활용할 경우 행위 주도 테스트이므로 사용자 관점에서 유닛 테스트 코드를 작성한다.
+
+이와 반대인 경우를 Implementation Driven Test(구현 주도 테스트)라고 부르며 개발자 관점에서 검증 포커스를 맞춘다.
+
+이 둘의 철학 방식은 아래의 코드에서 나뉜다.
+
+```html
+
+<h2 className="login_title">로그인</h2>
+
+```
+
+- 구현 주도 테스트에서는 개발자의 입장에서 className과 h2의 엘리먼트가 사용되었는지가 중요하다.
+- 행위 주도 테스트에서는 사용자의 입장에서 '로그인' 이라는 텍스트가 있는지 중요하다.
+
+
+## 구현 주도 테스트 대표적 라이브러리 Enzyme
+
+Enzyme은 Airbnb 회사에서 만든 테스팅 라이브러리이다.
+
+Implementation Driven Test(구현 주도 테스트) 방법론 철학에 따라 state의 변화와 props 경로를 추적하며,
+
+React의 가상 돔 기반에 맞춰 테스트 코드 작성을 진행해야 한다.
+
+⛔️ 최근 React 18 version이 나온 시점에서 Enzyme 업데이트가 전혀 진전이 없으므로 주의해야 한다.
+
+## 행위 주도 테스트 대표적 라이브러리 react-testing-library
+
+react-testing-library는 실제 웹 브라우저 DOM을 바탕으로 테스트 코드를 작성해야 한다.
+
+즉, 어떤 React 컴포넌트 및 내부 환경에 포커스를 맞출 필요 없이,
+
+사용자 브라우저에서 랜더링하는 HTML 마크업이 어떻게 표출 되는지 테스팅 한다.
+
+
+## 채택한 방법론은 행위 주도 테스트
+
+가장 큰 이유는 Enzyme 라이브러리는 더 이상 Github 커밋 기록이 2년 가까이 방치된 상태이므로 
+
+웹팩 React에서 기본 탑재된 react-testing-library를 사용하게 되었다. (jest 또한 module에 탑재되어 있음)
+
+
