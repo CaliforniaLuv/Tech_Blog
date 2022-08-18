@@ -9,7 +9,7 @@ tags:   Javascript
 
 프로젝트 CBT 단계가 끝날 무렵 회사 주간 회의에서 유닛 테스트 진행을 해봤냐는 질문을 받았다.
 
-그 동안 작업에만 몰두한다고 한 번도 코드 검사를 하지 않은 관계로 
+그 동안 작업에만 몰두한다고 한 번도 코드 검사를 하지 않은 관계로 난감 했는데,
 
 이번 시간에는 React 웹팩을 설치하면 기본 탑재되어 있는 __Jest__, __react-testing-library__ 를 활용하여 TDD 작업을 해보자.
 
@@ -59,4 +59,74 @@ react-testing-library는 실제 웹 브라우저 DOM을 바탕으로 테스트 �
 
 웹팩 React에서 기본 탑재된 react-testing-library를 사용하게 되었다. (jest 또한 module에 탑재되어 있음)
 
+## 작업 전 Test 파일 작성 규칙
+
+```
+Login.test.js 
+SignUp.test.js
+Search.test.js
+```
+
+파일명 다음 test 라는 명칭을 꼭 명시해야 jest 유닛 테스트 파일로 인식이 된다.
+
+---
+
+
+# 페이지 첫 렌더링 test
+
+{% highlight js %}
+
+describe("Login 페이지 테스트 시작", () => {
+  it("Login 페이지 첫 렌더링", () => {
+    render(<Login />);
+  });
+});
+ 
+{% endhighlight %}
+
+
+# 이메일, 비밀번호 텍스트 검사 및 change test
+
+{% highlight js %}
+
+describe("Login 페이지 테스트 시작", () => {
+  it("Login 페이지 첫 렌더링", () => {
+    render(<Login />);
+  });
+
+  it("이메일, 비밀번호 입력", () => {
+    render(<InputLoginBox inputText={{ email: "", password: "" }} />);
+
+    const email = screen.getByPlaceholderText("아이디(이메일)");
+    const password = screen.getByPlaceholderText("아이디(이메일)");
+
+    fireEvent.change(email, { target: { value: "user@test.com" } });
+    fireEvent.change(password, { target: { value: "Test1234" } });
+  });
+ });
+ 
+{% endhighlight %}
+
+# Login URL 확인 test
+
+{% highlight js %}
+
+describe("Login 페이지 테스트 시작", () => {
+  it("Login URL 확인", async () => {
+    const defaultUrl = "/login?success";
+    const history = createMemoryHistory({ initialEntries: [defaultUrl] });
+
+    render(
+      <Router location={history.location.pathname + history.location.search}>
+        <Login />
+      </Router>
+    );
+    expect(history.location.pathname + history.location.search).toEqual(
+      defaultUrl
+    );
+
+    const email = screen.getByPlaceholderText("아이디(이메일)");
+ });
+ 
+{% endhighlight %}
 
