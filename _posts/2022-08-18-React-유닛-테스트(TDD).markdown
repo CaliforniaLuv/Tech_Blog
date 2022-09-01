@@ -2,8 +2,8 @@
 layout: post
 title:  React 유닛 테스트(TDD)
 date:   2022-08-18 00:3:00 +0300
-image:  Javascript.png
-tags:   Javascript
+image:  React.png
+tags:   Tech
 ---
 
 
