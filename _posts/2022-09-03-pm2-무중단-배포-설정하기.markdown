@@ -1,0 +1,68 @@
+---
+layout: post
+title:  pm2 무중단 배포 설정하기
+date:   2022-09-03 01:10:00 +0300
+image:  Javascript.png
+tags:   JavaScript
+---
+
+Amazon EC2 클라우드 서비스를 통해 클라이언트, 서버 양 쪽 배포 설정을 필요할 경우가 있을 경우를
+
+대비해 명령어들을 기록하였다.
+
+--- 
+
+## NPM PM2 설치
+
+```
+npm install pm2 -g
+```
+
+---
+
+## 서버 및 클라이언트 실행
+
+- 클라이언트
+
+```
+pm2 --name <name> start npm -- start --watch
+```
+
+- 서버
+
+```
+pm2 start <index.js> --name <name> --watch
+```
+
+---
+
+## List 목록 확인
+
+
+```
+pm2 list
+```
+
+---
+
+## 재시작
+
+```
+pm2 restart <name>
+```
+
+---
+
+## 로그 확인하기
+
+```
+pm2 monit
+```
+
+---
+
+## 삭제
+
+```
+pm2 delete <name>
+```
