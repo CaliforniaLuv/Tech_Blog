@@ -2,8 +2,8 @@
 layout: post
 title:  pm2 무중단 배포 설정하기
 date:   2022-09-03 01:10:00 +0300
-image:  Javascript.png
-tags:   JavaScript
+image:  pm2.png
+tags:   pm2
 ---
 
 Amazon EC2 클라우드 서비스를 통해 클라이언트, 서버 양 쪽 배포 설정을 필요할 경우가 있을 경우를
