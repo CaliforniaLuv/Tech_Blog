@@ -1,0 +1,82 @@
+---
+layout: post
+title:  EC2 Memory 부족현상 관리
+date:   2022-09-06 01:10:00 +0300
+image:  aws.png
+tags:   Tech
+---
+
+
+회사에서 임시로 프로젝트 시연용, 개발용 환경을 EC2를 통해 클라이언트, 서버를 통합해서 관리하고 있다.
+
+그러나 무중단을 위해 PM2를 활용하여 4개의 Port를 개방하다 보니 t3.micro 사양으로 RAM 관리하기 힘들며,
+
+![다운로드](https://user-images.githubusercontent.com/78064720/188481884-59885a98-4ca9-4eba-ab3c-8df55d0424f3.png)
+
+npm run build 할 경우 간혹 build가 무한 로딩 걸리는 현상이 있었다.
+
+그러하여 메모리를 효율적으로 관리하기 위해 3가지 방법을 기록하였다.
+
+---
+
+## NPM cashe 관리
+
+```
+npm cache verify
+```
+
+npm cache는 npm-cache/cache 폴더에 저장되어, http 요청 데이터 및 node 패키지 데이터를 저장한다.
+
+간혹 자주 패키지를 __업그레이드__ 하거나, __빌드__ 를 하다보면 저장 요소들이 꼬이는 경우가 있어 비워주면 좋다.
+
+---
+
+##  GENERATE_SOURCEMAP
+
+``
+"build": "GENERATE_SOURCEMAP=false react-scripts build"
+``
+
+package.json 파일의 build 키워드에 __GENERATE_SOURCEMAP__ 속성을 false로 설정한다. 
+
+배포를 할 경우, HTML, CSS, JS 등 웹 코드들을 압축하는데 압축된 코드에서 에러가 발생할 경우 디버깅을 하기 위해
+
+GENERATE_SOURCEMAP이 원본 코드의 오류난 특정 부분을 체크한다.
+
+향후 프로덕션 배포를 진행할 경우 이 옵션은 끄는게 좋은데, 노출되면 안되는 코드를 보호해주는 역할을 수행하기 하기 때문이다.
+
+또한 소스의 크기가 클 수록 더 많은 디버깅 정보가 빌드되어 괜히 빌드 용량만 커지므로 메모리 공간에 불필요 영역까지 차지하게 된다.
+
+---
+
+## EC2 메모리 스왑
+
+
+![다운로드 (1)](https://user-images.githubusercontent.com/78064720/188483599-3c531363-1a60-42ba-befe-88fdb4bc2c3d.png)
+
+1, 2번 방법을 통해서도 메모리 관리가 안된다면 메모리를 스왑하면 좋다.
+
+위 사진에서 스왑 메모리가 지정되지 않을 경우 0 값에 수렴한다.
+
+- 스왑 메모리 연결
+```
+ sudo dd if=/dev/zero of=/mnt/swapfile bs=1M count=2048
+ sudo mkswap /mnt/swapfile
+ sudo swapon /mnt/swapfile
+```
+
+위 명령어들로 통해 스왑 메모리를 생성할 경우,
+
+스왑 메모리에 여유 공간을 더 확보할 수가 있다.
+
+그러나 빌드가 완료되면 꼭 다시 원복하여야 한다.
+
+
+- 스왑 메모리 해제
+```
+ sudo swapoff -v /mnt/swapfile 
+ sudo rm /mnt/swapfile
+```
+
+왜냐하면 가상 메모리를 사용할 경우 배포된 환경에 __속도 저하__ 가 일어날 수 있으므로 주의하여야 한다.
+
