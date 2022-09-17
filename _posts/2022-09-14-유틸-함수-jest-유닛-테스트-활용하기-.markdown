@@ -14,7 +14,7 @@ tags:   Tech
 
 ---
 
-## 수량 텍스트 처리 함수(countUnit)jest 유닛 테스트
+## 수량 텍스트 처리 함수(countUnit) jest 유닛 테스트
 
 
 {% highlight js %}
@@ -39,7 +39,7 @@ test.each`
 여기서 jest 메서드인 each를 사용하면 중복된 코드를 간략화하여 처리할 수 있다.(DB 쿼리문 템플릿 문법과 비슷하다.)
 
 
-## 숫자 금액 텍스트 처리 함수(moneyUnit)jest 유닛 테스트
+## 숫자 금액 텍스트 처리 함수(moneyUnit) jest 유닛 테스트
 
 
 {% highlight js %}
@@ -58,6 +58,25 @@ test.each`
   ${505230500000} | ${"5,052억원"}
 `("숫자 값의 원(문자) 단위 처리", ({ source, expected }) => {
   const result = moneyUnit_NotSpan(source);
+  expect(result).toBe(expected);
+});
+
+{% endhighlight %}
+
+## Wh 단위 처리 함수(capacityUnit) jest 유닛 테스트
+
+{% highlight js %}
+
+test.each`
+  source   | expected
+  ${0}     | ${" kWh"}
+  ${1}     | ${" MWh"}
+  ${10}    | ${" MWh"}
+  ${100}   | ${" MWh"}
+  ${10000} | ${" GWh"}
+`("숫자 값의 와트/시간 단위 처리", ({ source, expected }) => {
+  const value = capacityUnit(source);
+  const result = value.props.children[1].props.children;
   expect(result).toBe(expected);
 });
 
