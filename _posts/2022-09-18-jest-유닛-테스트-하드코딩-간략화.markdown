@@ -1,0 +1,90 @@
+---
+layout: post
+title:  jest 유닛 테스트 하드코딩 간략화
+date:   2022-09-19 00:30:00 +0300
+image:  jest.png
+tags:   Tech
+---
+
+유닛 테스트 코드를 작성하다 보면 테스트 우선 개발 혹은 테스트 주도 개발 과정에서 항상 __하드 코딩__ 을 하게 되는 경우가 있다.
+
+그러한 경우 코드를 최대한 간략화할 수 있는 코드 작성법을 기록하고자 한다.
+
+---
+
+## 하드 코딩으로 처리된 유닛 테스트
+
+### 유틸 처리 함수 코드
+
+
+{% highlight js %}
+
+export function filtering(s, arr) {
+  return s.replace(arr[0], "@@").replace(arr[1], "@@@");
+}
+
+{% endhighlight %}
+
+
+### 유닛 테스트 코드
+
+{% highlight js %}
+
+const filter = ["바보", "멍청이"];
+
+test.each`
+  source                 | bannedWords | expected
+  ${"안녕 바보야"}       | ${filter}   | ${"안녕 @@야"}
+  ${"너 정말 멍청이냐?"} | ${filter}   | ${"너 정말 @@@냐?"}
+`(`필터링 단어 테스트`, ({ source, bannedWords, expected }) => {
+  const actual = filtering(source, bannedWords);
+  expect(actual).toBe(expected);
+});
+
+{% endhighlight %}
+
+해당 코드는 긍정적으로 바라보면 직관적 코드라 해석하기가 쉽지만, 
+
+많은 필터링 단어가 있을 경우 하나하나 작성하기 귀찮아 지므로 하드 코딩이 되버린다.
+
+## 중복 코드 경량화하여 처리된 유닛 테스트
+
+
+### 유틸 처리 함수 코드
+
+
+{% highlight js %}
+
+export function filtering(s, options) {
+  //   return s.replace(arr[0], "@@").replace(arr[1], "@@@");
+  console.log(options);
+  if (options) {
+    for (const bannedWords of options.bannedWords) {
+      return (s = s.replace(bannedWords, "@".repeat(bannedWords.length)));
+    }
+  }
+}
+{% endhighlight %}
+
+### 유닛 테스트 코드
+
+{% highlight js %}
+
+  let badWords = ["바보", "멍청이", "똥쟁이", "핵뚱땡이", "난쟁이똥자루"];
+  const bannedWords = badWords[Math.floor(Math.random() * badWords.length)];
+  const source = "안녕 " + bannedWords;
+  const expected = "안녕 " + "*".repeat(bannedWords.length);
+  test("필터링 단어 코드 중복 처리 테스트", () => {
+    const actual = filtering(source, { bannedWords: [bannedWords] });
+    console.log("actual :", actual);
+    console.log("expected :", expected);
+    expect(actual).toBe(expected);
+  });
+
+
+{% endhighlight %}
+
+각 금지 단어 리스트를 배열로 묶고 인덱스 값의 문자 길이를 키워드로 사용하여 반복문으로 처리하면,
+
+위와 별개로 직접 경우의 수에 맞는 테스트 코드를 작성할 필요가 없어진다.
+
