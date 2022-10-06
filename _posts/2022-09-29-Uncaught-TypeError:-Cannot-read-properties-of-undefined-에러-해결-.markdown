@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Uncaught-TypeError: Cannot read properties of undefined 에러 해결
+title:  Uncaught-TypeError Cannot read properties of undefined 에러 해결
 date:   2022-09-30 02:07:00 +0300
 image:  Javascript.png
 tags:   JavaScript
