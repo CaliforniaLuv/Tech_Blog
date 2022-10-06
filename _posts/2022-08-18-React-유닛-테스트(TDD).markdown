@@ -95,7 +95,7 @@ describe("Login 페이지 테스트 시작", () => {
   });
 
   it("이메일, 비밀번호 입력", () => {
-    render(<InputLoginBox inputText={{ email: "", password: "" }} />);
+    render(<InputLoginBox inputText={ email: "", password: "" } />);
 
     const email = screen.getByPlaceholderText("아이디(이메일)");
     const password = screen.getByPlaceholderText("아이디(이메일)");
