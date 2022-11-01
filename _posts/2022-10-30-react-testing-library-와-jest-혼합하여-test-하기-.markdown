@@ -58,7 +58,10 @@ describe("Input 입력 컴포넌트 테스트 시작", () => {
 
 2. 만일 입력이 실패될 경우 onChange 이벤트가 작동되지 않는 관계로 해당 코드의 오류가 발생된 것으로 판단할 수 있다.
 
-## form onSubmit 함수 호출 확인하기
+
+---
+
+# form onSubmit 함수 호출 확인하기
 
 ![onClick](https://user-images.githubusercontent.com/78064720/198867533-a036a0a5-bb7a-427a-9400-d8b43e9d9bd5.png)
 
@@ -119,5 +122,121 @@ Jest 검증 메서드 문법 중 ```toHaveBeenCalled``` 함수 호출이 되었�
 
 2. 만일 Email과 Password 값이 없을 경우 버튼은 비활성화가 되어 클릭 이벤트가 차단되어야 한다. (테스트 오류 발생)
 
+---
+
+# form onSubmit 함수 호출 후 실패 문구 Text 및 Color 검사하기
+
+<img width="522" alt="스크린샷 2022-11-01 18 54 26" src="https://user-images.githubusercontent.com/78064720/199208064-74a3dec5-7ff8-43f8-939f-2650189e82e6.png">
 
 
+{% highlight js %}
+
+it("form submit 실패시 발생하는 텍스트 문구 테스트", async () => {
+    const user = {
+      email: "caiforniaLuv@gmail.com",
+      password: "1q2w3e4r@@",
+    };
+
+    const statusType = {
+      fail_msg400: "비밀번호가 올바르지 않습니다.",
+      fail_msg404: "존재하지 않는 email입니다.",
+    };
+
+    const { getByTestId } = render(<Login />);
+
+    // 이메일, 패스워드 input 엘리먼트 접근
+    const inputEmailElement = getByTestId("Input_Email");
+    const inputPwElement = getByTestId("Input_Password");
+
+    // form 엘리먼트
+    const formLoginElement = getByTestId("form_login");
+
+    // 이메일 text onChange 이벤트 발동
+    fireEvent.change(inputEmailElement, {
+      target: { value: "caiforniaLuv@gmail.com" },
+    });
+
+    // 패스워드 text onChange 이벤트 발동
+    fireEvent.change(inputPwElement, {
+      target: { value: "1q2w3e4r@@" },
+    });
+
+    // 이메일, 비밀번호 공백 판별
+    const typeBoolean = inputEmailElement.value && inputPwElement.value;
+
+    // 로그인 버튼 클릭 후 이메일, 비밀번호 작성한 값에 따라 상태코드 전달
+    const loginCheck = (email, password) => {
+      if (email === user.email && password === user.password) {
+        return true;
+      } else if (email !== user.email && password === user.password) {
+        return 404;
+      } else if (email === user.email && password !== user.password) {
+        return 400;
+      } else {
+        return 0;
+      }
+    };
+
+    const handleLogin = jest.fn(() => {
+      if (loginCheck(inputEmailElement.value, inputPwElement.value) === true) {
+        return 200;
+      } else {
+        return loginCheck(inputEmailElement.value, inputPwElement.value);
+      }
+    });
+
+    // 로그인 버튼 클릭 함수 (직접 호출하여 리턴값 변수에 저장 필요)
+    var login_test = handleLogin();
+
+    // 로그인 버튼 클릭 이벤트 발생
+    fireEvent.click(formLoginElement, {
+      onsubmit: typeBoolean ? handleLogin() : null,
+    });
+
+    // 클릭 이벤트 확인 test
+    expect(handleLogin).toHaveBeenCalled();
+
+    render(<LoginFail loginStatus={login_test} loginList={statusType} />);
+
+    // 오류 문구 DOM 접근 함수
+    const result = (id) => {
+      const failElement = getByTestId(id);
+      // 텍스트 color 확인 test
+      expect(failElement).toHaveStyle({ color: "#c00a21" });
+      return failElement;
+    };
+
+    // 로그인 클릭 결과에 따른 상태코드 판별
+    if (login_test === 200) {
+      expect(null).toBe(null);
+    } else if (login_test === 404) {
+      // 이메일 틀릴 경우 텍스트 결과 확인 test
+      expect(result("Login_Fail_404")).toHaveTextContent(
+        "존재하지 않는 email입니다."
+      );
+    } else if (login_test === 400) {
+      // 비밀번호 틀릴 경우 텍스트 결과 확인 test
+      expect(result("Login_Fail_400")).toHaveTextContent(
+        "비밀번호가 올바르지 않습니다."
+      );
+    }
+
+{% endhighlight %}
+ 
+## test 시나리오 1
+
+![password](https://user-images.githubusercontent.com/78064720/199208644-b6a7b23a-554c-430c-87e2-991380c869c0.png)
+
+1. 로그인 입력창에 이미 존재하는 이메일을 전송할 경우 404 상태 코드 전송된다.
+ 
+2. 비밀번호가 옳지 않을 경우 400 상태 코드 전송된다.
+
+## test 시나리오 2
+
+![dom](https://user-images.githubusercontent.com/78064720/199208784-4f75851d-1587-4a28-b61f-7c177dd804ad.png)
+
+![color](https://user-images.githubusercontent.com/78064720/199208802-e8791597-1cb1-4b3f-a38b-6bcf5548ada9.png)
+
+1. 로그인 하단 Text의 color가 #c00a1(브라우저 DOM에선 rgb code로 변환) 
+
+2. 만일 color를 다른 code로 작성할 경우 테스트 오류가 발생한다.
