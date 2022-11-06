@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  react-testing-library-와-jest-혼합하여-test-하기
+title:  react testing library와 jest 혼합하여 test 하기
 date:   2022-10-30 16:25:00 +0300
 image:  jest-testing.png
 tags:   Tech
