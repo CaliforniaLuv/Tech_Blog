@@ -1,0 +1,123 @@
+---
+layout: post
+title: Scroll 애니메이션 트리거 구현
+date:   2022-11-18 04:30:00 +0300
+image:  Javascript.png
+tags:   Javascript
+---
+
+스크롤 이벤트 리스너를 통해 특정 엘리먼트 구간에 도달할 경우 애니메이션을 구현해야하는 경우가 있다.
+
+{% highlight js %}
+
+window.scroll(elementY)
+
+{% endhighlight %}
+
+보통 window.scroll 이벤트를 활용하여 각각 원하는 특정 엘리먼트 Y 값에 도달할 경우 
+
+애니메이션이 동작하도록 하기에는 불필요한 작업과 [성능](https://itnext.io/1v1-scroll-listener-vs-intersection-observers-469a26ab9eb6) 면에서도 이슈가 있다.
+
+viewport를 활용하여 특정 엘리먼트 시점을 파악하는 비동적 ```IntersectionObserver``` web API에 대해 알아보자.
+
+---
+
+# IntersectionObserver 코드 요약 
+
+{% highlight js %}
+
+  const wrapRef = useRef();
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+      } else {
+        entry.target.classList.remove("active");
+      }
+    });
+  }, options);
+
+  useEffect(() => {
+    const boxList = wrapRef.current.querySelectorAll(".box");
+    boxList.forEach((el) => observer.observe(el));
+  }, []);
+
+  return (
+    <div className="page">
+      <div ref={wrapRef} className="wrap">
+        <div className="box">1</div>
+        <div className="box">2</div>
+        <div className="box">3</div>
+        <div className="box">4</div>
+        <div className="box">5</div>
+        <div className="box">6</div>
+        <div className="box">7</div>
+        <div className="box">8</div>
+      </div>
+    </div>
+  );
+
+{% endhighlight %}
+
+```box``` 클래스를 소요한 엘리먼트가 viewport 범위에 들어올 경우 ```IntersectionObserver``` web api를 통해 동작되는 구조이다.
+
+
+# IntersectionObserver 상세 정보
+
+{% highlight js %}
+
+IntersectionObserver((Entries, Observer), option)
+
+{% endhighlight %}
+
+
+## callback
+
+
+callback 함수에는 두 개의 인수를 갖고 있으며, 각각 
+
+Entries : 관찰되고 있는 배열 리스트를 반환, observer
+Observer : 콜백함수가 호출되는 IntersectionObserver 
+
+특성을 갖고 있다.
+
+### Entries
+
+boundingClientRect: 관찰 대상의 사각형 정보(DOMRectReadOnly)
+intersectionRect: 관찰 대상의 교차한 영역 정보(DOMRectReadOnly)
+intersectionRatio: 관찰 대상의 교차한 영역 백분율(intersectionRect 영역에서 boundingClientRect 영역까지 비율, Number)
+isIntersecting: 관찰 대상의 교차 상태(Boolean)
+rootBounds: 지정한 루트 요소의 사각형 정보(DOMRectReadOnly)
+target: 관찰 대상 요소(Element)
+time: 변경이 발생한 시간 정보(DOMHighResTimeStamp)
+
+### observer
+
+콜백이 실행되는 해당 인스턴스를 참조한다.
+
+## option
+
+root : 어떤 요소를 기준으로 target이 들어오고 나가는 것을 확인할지 지어 기본은 브라우저(viewport)
+oortMargin: root의 범위를 확장, 축소 가능
+threshold : target과 root의 교차가 얼마나 일어나야 callback 함수를 실행할지 지정 (0.5일 경우 viewport의 50% 정도 차지할 경우 교차 발생)
+
+
+## 매커니즘 발동 과정
+
+<img width="880" alt="스크린샷 2022-11-18 15 56 25" src="https://user-images.githubusercontent.com/78064720/202647447-8c8f17ff-5b79-4c36-a779-64b696db5aca.png">
+
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/78064720/202653777-983d40ad-c27a-4c44-861d-9544d48b1355.gif)
+
+viewport의 상하에 각각 option에 설정한 threshold의 값에 따라 결정된다.
+
+만일 0.5로 설정을 맞췄다면 50% 정도의 상하 간격이 해당 요소에 교차 영역을 확보할 경우 콜백함수의 로직이 실행된다.
+
+
+
+
