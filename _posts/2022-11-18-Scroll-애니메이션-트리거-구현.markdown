@@ -18,7 +18,7 @@ window.scroll(elementY)
 
 애니메이션이 동작하도록 하기에는 불필요한 작업과 [성능](https://itnext.io/1v1-scroll-listener-vs-intersection-observers-469a26ab9eb6) 면에서도 이슈가 있다.
 
-viewport를 활용하여 특정 엘리먼트 시점을 파악하는 비동적 ```IntersectionObserver``` web API에 대해 알아보자.
+viewport를 활용하여 특정 엘리먼트 시점을 파악하는 비동기적 ```IntersectionObserver``` web API에 대해 알아보자.
 
 ---
 
