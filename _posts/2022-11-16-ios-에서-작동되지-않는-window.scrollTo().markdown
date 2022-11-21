@@ -1,6 +1,6 @@
 ---
 layout: post
-title: TypeScript 튜플
+title: ios에서 작동되지 않는 window.scrollTo()
 date:   2022-11-16 01:07:00 +0300
 image:  Javascript.png
 tags:   Javascript
