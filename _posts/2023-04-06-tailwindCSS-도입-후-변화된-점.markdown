@@ -2,8 +2,8 @@
 layout: post
 title:  tailwindCSS 도입 후 변화된 점
 date:   2023-04-06 14:25:00 +0300
-image:  web.png
-tags:   Web
+image:  tailwindcss..png
+tags:   Tech
 ---
 
 사내 프로젝트에서 그동안 css만 사용하다 
