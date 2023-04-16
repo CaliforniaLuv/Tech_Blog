@@ -47,7 +47,7 @@ tags:   Javascript
 
 Promise.all 메서드 안에서 image URL 값들이 담긴 배열들을 순차적으로 파일 오브젝트 변환을 시도하였다.
 
-그 결과 아래의 사진과 같이 image URL index는 제 각각 내가 생성한 배열에(```imagesConverter```) push 되었다.
+그 결과 아래의 사진과 같이 image URL index는 제 각각 내가 생성한 배열에(imagesConverter) push 되었다.
 
 ![스크린샷 2023-04-16 22 39 06](https://user-images.githubusercontent.com/78064720/232316086-91ea2be4-ef65-4588-a972-1c1745b62d5d.png)
 
@@ -89,8 +89,8 @@ Promise.all은 태스크 단위들을 절차적 수행이 아닌 __병렬적 형
 {% endhighlight %}
 
 
-1. 우선 파일 오브젝트 형태로 변환하여 배열에(```orderConverterPromiseList```) 절차적으로 저장한다.
-2. 변환이 다 완료되었지만 promise<Fullfilled> 상태이므로 promise.all 메서드를 활용하여 비동기 처리 후 변수에(```imagesConverterList```) 할당한다.
+1. 우선 파일 오브젝트 형태로 변환하여 배열에(orderConverterPromiseList) 절차적으로 저장한다.
+2. 변환이 다 완료되었지만 promise<Fullfilled> 상태이므로 promise.all 메서드를 활용하여 비동기 처리 후 변수에(imagesConverterList) 할당한다.
   
 ![스크린샷 2023-04-16 22 39 32](https://user-images.githubusercontent.com/78064720/232316125-53c5c1a8-4207-4f8c-8941-c8ae27145c2d.png)
 
