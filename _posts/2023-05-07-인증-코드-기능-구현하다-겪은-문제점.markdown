@@ -20,7 +20,7 @@ tags:   Tech
 
 <img width="1215" alt="스크린샷 2023-05-07 오후 3 56 02" src="https://user-images.githubusercontent.com/78064720/236662648-207f4dcf-8dcc-465e-a09c-8012132c8e21.png">
 
-인증 코드 기능을 구현하였는데 큰 난간을 봉착하게 되었다.
+인증 코드 기능을 구현하였는데 큰 난관을 봉착하게 되었다.
 
 브라우저의 localStorage에 유저 정보를 담고 있었는데 
 
