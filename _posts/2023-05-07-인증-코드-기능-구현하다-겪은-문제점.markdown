@@ -1,0 +1,106 @@
+---
+layout: post
+title:  인증 코드 기능 구현하다 겪은 문제점
+date:   2023-05-07 15:55:00 +0300
+image:  web.png
+tags:   Tech
+---
+
+인증 코드 기능을 구현하며 깊은 고민을 하지 않은 채 무작정
+
+``` 그냥 돌아가기만 하면 되겠지? Aye 설마 문제 터지겠어~ ```
+
+마인드로 작업하다 사내 시니어 개발자님께 결국 혼났다... 😥
+
+반성의 의미로 포스팅을 남긴다.
+
+---
+
+# 기능을 구현하다 맞닥뜨린 문제
+
+<img width="1215" alt="스크린샷 2023-05-07 오후 3 56 02" src="https://user-images.githubusercontent.com/78064720/236662648-207f4dcf-8dcc-465e-a09c-8012132c8e21.png">
+
+인증 코드 기능을 구현하였는데 큰 난간을 봉착하게 되었다.
+
+브라우저의 localStorage에 유저 정보를 담고 있었는데 
+
+사용자의 민감 정보를 그대로 저장하고 있어 만일 인증 코드를 하지 않은 상태를 그대로 나둘 경우,
+
+```
+email: wlstjd1234@naver.com
+usename: wlstjd1234
+phone: 01099991111
+```
+
+사용자 정보가 localStorage에 여전히 저장하고 있었다.
+
+그러나 새로고침을 하여도 사용자 정보는 그대로 유지를 해야하는 관계로 휘발성이 낮은 브라우저 공간에 담아둘 필요가 있다.
+
+
+# 해결 방안책
+
+## URL 쿼리스트링 사용하기
+
+```dev.testsite.io/?user=wlstjd213&number=01099997777&email=califoniaLuv@naver.com```
+
+유저 정보를 URL 쿼리스트링에 담아서 언제든 가져올 수 있도록 구현하는 방법이다.
+
+그러나 위의 주소는 결국 방문 기록에 계속 남는데 url에 사용자 정보를 저렇게 담아두는 것은 위험하기에 이 방법은 좋지 못하다.
+
+## localStorage 만료기간 사용하기
+
+{% highlight html %}
+// 현재 시간에 15분 더한 만료 일자
+const expirationDate = new Date().getTime() + (15 * 60 * 1000);
+
+// 데이터와 함께 만료 일자를 LocalStorage에 저장
+localStorage.setItem('myData', JSON.stringify({expiration: expirationDate}));
+{% endhighlight %}
+
+{% highlight html %}
+// LocalStorage의 데이터 변수 생성
+const myData = JSON.parse(localStorage.getItem('myData'));
+
+// 만료일이 지날 경우 삭제
+if (myData && myData.expiration && new Date().getTime() > myData.expiration) {
+  localStorage.removeItem('myData');
+}
+{% endhighlight %}
+
+위와 같은 방식을 사용하여 특정 로직에 도달할 경우 만료기간을 활용하여 삭제를 한다.
+
+그렇다면 삭제를 해야할 시점을 3가지 정해보았다.
+
+1. 페이지들 이동할 때마다
+2. 인증 코드 페이지를 접근할 때만
+3. 다시 회원가입을 성공했을 때 
+
+
+1번: 많은 페이지들 중에 인증 코드와 밀접한 페이지는 극히 적은 상태에 일일히 다 검사하기엔 너무 불필요한 작업 과정이 있기에 비효율적이다.
+2번: 인증 코드 페이지 접근할 때만 사실 해당 localStorage 만료기간 조회가 필요하기에 적합하다.
+3번: 회원가입이 되는 과정에 localStorage 만료기간 조회까지 하기엔 복잡해질 수도 있어 한 눈에 파악하기 힘들어질 수 있다.
+
+그러나 궁극적으로 결국 localStorage에 회원 정보를 담는 것은 앞에 언급한 보안 문제와 동일하므로 XSS 같은 보안에 위험하다.
+
+## 회원 가입 성공 후 Token으로 관리하기
+
+<img width="1199" alt="스크린샷 2023-05-07 오후 5 17 42" src="https://user-images.githubusercontent.com/78064720/236666075-07f1739f-7140-4587-a7e5-d39c86444e5e.png">
+
+서버에서 회원가입과 관련된 token을 주면 해당 토큰은 유저의 민감 정보가 아니게 된다.(물론 탈취되면 위험!!)
+
+그러나 만료 기간에 대한 기준을 서버와 클라이언트 중 어디서 정할 지 백엔드 엔지니어와 논의가 필요하다.
+
+
+# 결론
+
+여러 대안책을 고안한 끝에 3가지 방법 중 __회원 가입 성공 후 Token으로 관리하기__ 가 가장 안전할 듯 하다.
+
+매번 구현에만 몰두하고 그 후 발생할 수 있는 허점들을 깊게 생각 안한 거 같았다.
+
+앞으로 기획 제안서를 읽고 일어날 수 있는 경우들을 flow chart 형태로 그려보며 기획자와 백엔드 엔지니어에게 공유를 자주하도록 반성 중이다...
+
+---
+
+
+
+
