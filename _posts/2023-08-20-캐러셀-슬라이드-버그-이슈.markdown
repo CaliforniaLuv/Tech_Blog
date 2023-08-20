@@ -1,0 +1,176 @@
+---
+layout: post
+title:  캐러셀 슬라이드 버그 이슈
+date:   2023-08-20 15:40:00 +0300
+image:  React.png
+tags:   React
+---
+
+사내 홈페이지를 새로 리뉴얼하는 프로젝트를 맡게 되었다.
+
+아직 기획팀과 디자인팀은 투입되지 못한 상황인 관계로 현재 홈페이지를 리펙토링 하는 작업을 먼저 진행 중이다.
+
+회사 수상 내역을 소개하는 vertical carousel slide UI를 라이브러리를 통해 사용하고 있어 직접 슬라이드 UI를 구현하도록 수정하였다.
+
+그러나 타이머 싱크가 맞지 않는 버그를 발견하여 기록하고자 포스팅을 남긴다.
+
+---
+
+# 버그가 발생한 코드
+
+{% highlight javascript %}
+
+export const Slide = ({ children }: { children: React.ReactNode }) => {
+  const childrenArray = React.Children.toArray(children);
+  const containerRef = useRef<HTMLUListElement>(null);
+
+  const [current, setCurrent] = useState(1);
+  const [translateY, setTranslateY] = useState(0);
+
+  const slides = useMemo(() => {
+      let items = Children.map(childrenArray, (child, idx) => (
+        <li key={idx}>{child}</li>
+      ));
+
+      return [
+        ...items,
+        <li key={childrenArray.length + 2}>{childrenArray[0]}</li>,
+      ];
+  }, [childrenArray]);
+
+  const actionHandler = useCallback(() => {
+    if (!containerRef.current) return;
+
+    if (current > childrenArray.length) {
+      containerRef.current.style.transition = "none";
+      setCurrent(1);
+      setTranslateY(0);
+    } else {
+      containerRef.current.style.transition = "transform 1.5s ease-in-out";
+      setTranslateY(82 * current);
+      setCurrent((prev) => ++prev);
+    }
+  }, [current, childrenArray]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      actionHandler();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [actionHandler, current]);
+
+--- html 코드 이하 생략 ---
+
+{% endhighlight %}
+
+### 코드 로직 간단한 설명
+
+1. 슬라이드 요소는 총 4개로 구현되어 있다.
+2. infinite 효과가 나타냐야 하므로 slide 변수에 첫번째 index를 마지막 요소에 복사하는 배열(length가 총 5개 형태)을 생성하였다.
+3. setInterval 메서드를 사용하여 3초 단위로 __actionHandler__ 함수를 실행한다.
+
+
+### 버그 추적
+
+그러나 해당 코드는 한 바퀴를 다 순환한 후 __다시 첫번째 index에서 두번째 index로 가는 딜레이 6초가 발생__ 하는 버그가 나타났다.
+
+마지막 index(첫번째 index 복사 요소)에서 애니메이션 transition을 none 처리하는데 이 구간에 6초가 발생하였고 아래와 같은 순서가 일어났다.
+
+1. 마지막 index 도착 => 3초 
+2. 첫번째 index에서 두번째 index 이동 => 3초
+
+그러나 자연스레 3초 단위로 이동을 하기 위해선 1번과 2번의 과정 3초 사이에 동시에 실행되어야 한다.
+
+버그를 수정하면서 아래와 삽질을 하게 되었다.
+
+1. 타이머 clean-up 재설정
+2. 마지막 인덱스에 도달할 경우 특수한 동작을 위한 트리거 상태 변수 추가
+
+모두 엉뚱한 동작을 수행하였다. 
+
+그 간단한 로직에 너무 깊은 생각에 빠져 많은 시간을 할애하여 결국 사수님에게 뇌동냥 🧠 을 요청하게 되었다.....
+
+
+# 해결된 코드
+
+{% highlight javascript %}
+
+export const Slide = ({ children }: { children: React.ReactNode }) => {
+  const childrenArray = React.Children.toArray(children);
+  const VIEW_SIZE = 82;
+
+  const containerRef = useRef<HTMLUListElement>(null);
+  const currentRef = useRef(1);
+
+  const slides = useMemo(() => {
+    if (childrenArray.length > 1) {
+      let items = Children.map(childrenArray, (child, idx) => (
+        <li key={idx}>{child}</li>
+      ));
+
+      return [
+        ...items,
+        <li key={childrenArray.length + 2}>{childrenArray[0]}</li>,
+      ];
+    }
+  }, [childrenArray]);
+
+  const actionHandler = useCallback(() => {
+    if (!containerRef.current) return;
+
+    if (currentRef.current === childrenArray.length) {
+      containerRef.current.ontransitionend = () => {
+        if (!containerRef.current) {
+          return;
+        }
+        containerRef.current.style.transition = "none";
+        containerRef.current.style.transform = `translate3d(0px, 0px, 0px)`;
+        currentRef.current = 1;
+
+        containerRef.current.ontransitionend = null;
+      };
+    }
+
+    containerRef.current.style.transition = "transform 1.5s ease-in-out";
+    containerRef.current.style.transform = `translate3d(0px, -${
+      currentRef.current * VIEW_SIZE
+    }px, 0px)`;
+
+    currentRef.current++;
+  }, [childrenArray]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      actionHandler();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [actionHandler]);
+
+
+--- html 코드 이하 생략 ---
+
+{% endhighlight %}
+
+### 개선된 코드 설명
+
+1. 현재 슬라이드 번호와 Y축 값을 설정한 상태 변수를 useRef hook으로 변경
+2. actionHandler 함수의 종속 배열에 현재 슬라이드 번호를 의미하는 변수 제거
+3. ontransitionend 이벤트 핸들러 속성을 접근하여 transition 애니메이션 완료되었을 때 transition와 transform 속성 수정
+
+
+# 버그에 대한 고찰
+
+사수님이 디버깅 하는 과정은 정확히 10분도 안된 체 해결하셨다... (3시간 동안 삽질한 나는 뭐냐?? 😇)
+
+우선 내 코드의 가장 큰 문제점은 타이머를 3초 간 설정하여 실행하는 함수 로직이 상태 변수를 업데이트하여 매번 렌더링이 발생하여 transition 애니메이션을 제어하고 있었다.
+
+또한, 해당 actionHandler 함수의 종속 배열에 current 상태 변수를 지정한 관계로 current가 업데이트할 때마다 접근하므로 6초라는 딜레이가 발생하게 되었다.
+
+물론 동적인 뷰를 관리하기 위해선 상태 변수를 사용하는 것이 옳지만 해당 UI는 3초 간 함수를 실행하고 직접 애니메이션을 접근하여 관리하기 때문에 매번 렌더링을 따로 관리할 필요가 없다.
+
+애니메이션 타이밍에 따라 제어를 할 때 __ontransitionend__ 이벤트 핸들러 같은 속성을 활용하면 특정 구간에 발동이 필요한 로직을 구현할 수 있으며
+
+__타이머에 따른 값을 관리하거나 렌더링에 크게 민감한 값들은__ useRef를 사용해보도록 깊은 생각이 필요했던 버그 였다. 
+
