@@ -1,0 +1,79 @@
+---
+layout: post
+title:  next.js Styled JSX를 통한 특정 라이브러리 css 변경하기
+date:   2023-11-12 03:10:00 +0300
+image:  React.png
+tags:   Next
+---
+
+React-Modal 라이브러리를 사용하여 모달 안 tooltip box가 영역에 벗어나 독립적인 형태로 보여줘야 하는 
+
+이슈가 발생하여 블로그 포스팅을 남긴다.
+
+---
+
+# 이슈 발생
+
+![스크린샷 2023-11-12 03 45 06](https://github.com/CaliforniaLuv/Tech_Blog/assets/78064720/b77d9549-9ed7-452f-bf3d-183df6623b14)
+
+해당 tooltip UI가 모달 영역에서 벗어난 형태로 보여주기 위해선 React-Modal 라이브러리에서 지원하는 
+
+```ReactModal__Content``` class의 overflow 속성을 변경해야 한다.
+
+위 className을 전역 css 파일에 unset 속성을 직접 입력하면 문제가 해결되지만, 다른 view 구간의 모든 모달에도 변경된 css 속성이 영향을 주게 되므로 문제가 발생할 수 있다.
+
+# Styled JSX 
+
+[next.js](https://nextjs.org/blog/styling-next-with-styled-jsx)에서는 ```CSS-in-js``` 방식을 이용한 Styled JSX 태그가 있다. 
+
+{% highlight javascript %}
+
+<style jsx>
+    {`
+        .layout {
+            overflow: { isHide ? "hidden" : "visible" }
+        }
+        .text {
+            color: { hasError ? "red" : "black" }
+        }
+   `}
+</style>
+
+{% endhighlight %}
+
+jsx 문법을 적용하여 CSS 스타일을 문자열로 활용할 수가 있고 조건부 렌더링이 필요할 경우 ```템플릿 문자열``` 로 구현할 수 있다.
+
+보통 특정 컴포넌트 view 영역에 선언하게 되면 해당 영역에 스타일이 적용되는데 global 속성을 활용하게 되면 모든 영역에 적용된다.
+
+global 속성을 잘 활용하면 특정 라이브러리의 className을 컨트롤할 수 있겠다는 방법을 찾게 되었다.
+
+# 이슈 해결
+
+![스크린샷 2023-11-12 03 44 35](https://github.com/CaliforniaLuv/Tech_Blog/assets/78064720/3d0554b5-aa52-41d1-9499-f5756f3eeca1)
+
+{% highlight javascript %}
+
+<>
+        <ReactModal
+          isOpen
+          appElement={document.getElementById("__next") || undefined}
+        >
+          <Content />
+        </ReactModal>
+        <style jsx global>{`
+          .ReactModal__Content {
+            overflow: unset !important;
+          }
+        `}</style>
+</>
+ 
+{% endhighlight %}
+
+라이브러리는 보다 더 상위 부모 태그에서 세팅된 관계로 해당 모달을 관리하는 hook에서 위와 같이 global 속성을 사용하여 해결 하였다.
+
+하지만 전역적으로 선언 하였기에 다른 react modal 에서도 ```모두 적용 되지 않을까?``` 라는 걱정도 있을 수 있을 텐데, 어차피 해당 모달 hook에서만 Styled JSX가 실행되고 
+
+닫는 순간(hideModal) 설정된 css 속성은 초기화 되는 관계로 문제가 없다.
+
+
+
