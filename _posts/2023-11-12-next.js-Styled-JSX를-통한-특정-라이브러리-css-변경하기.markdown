@@ -2,8 +2,8 @@
 layout: post
 title:  next.js Styled JSX를 통한 특정 라이브러리 css 변경하기
 date:   2023-11-12 03:10:00 +0300
-image:  React.png
-tags:   Next
+image:  Next_js.png
+tags:   Next.js
 ---
 
 React-Modal 라이브러리를 사용하여 모달 안 tooltip box가 영역에 벗어나 독립적인 형태로 보여줘야 하는 
