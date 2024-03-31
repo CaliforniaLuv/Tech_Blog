@@ -1,18 +1,17 @@
+---
 #-------------------------------
 # General Site Settings
 title: CaliforniaLuv
 logo: logo.png # You can add own logo.
 description: CaliforniaLuv is modern minimal theme for Jekyll
 
-
 #-------------------------------
 # Author Settings
 author:
   name: Lee Jin-Sung
-  image: 01.jpg
+  image: main.jpg
   say-hello: Hello, I’m <strong>Lee Jin-Sung</strong>
   bio: As a <strong>front-end developer</strong>, I'm responsible for <strong>web</strong> development. These days, I think <strong>UX/UI</strong> is important in web site.
-
 
 #-------------------------------
 # Contact links
@@ -23,17 +22,14 @@ github: https://github.com/CaliforniaLuv
 # Comment Section (Disqus)
 # disqus-identifier: mr-brown # add your shortname for Disqus Comment. For example mr-brown
 
-
 #-------------------------------
 # Instagram Feed
 instafeed: # To enable the instafeed, use the value true. To turn off use the value false.
 instagram-profile: artemsheludko_ # Add instagram username
 
-
 #-------------------------------
 # Google Analytics
 google-analytics: # Add your identifier. For example UA-99631805-1.
-
 
 #-------------------------------
 # Newsletter
