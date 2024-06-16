@@ -2,7 +2,7 @@
 layout: post
 title:  React clean하게 사용하기 chap1
 date:   2024-03-30 15:20:00 +0300
-image:  react.png
+image:  React.png
 tags:   react
 ---
 
