@@ -194,6 +194,36 @@ export const ListKey = ({ data }: ListKeyFailProps) => {
 
 # Raw HTML 코드의 위험성 방지하기
 
+## ❌ XSS 공격에 취약한 코드
+
+{% highlight javascript %}
+
+const SERVER_DATA = '<p>name: californiaLuv</p>'
+
+export const DangerouslySetInnerHTMLComponentFail = () => {
+  const markup = {__html: SERVER_DATA}
+  // 🙅‍♂️ Bad
+  return <div dangerouslySetInnerHTML={markup} />
+};
+
+{% endhighlight %}
+
+
+## ✅ dangerouslySetInnerHTML 및 보안 라이브러리 활용하기
+
+{% highlight javascript %}
+
+import DOMPurify from 'dompurify';
+
+const SERVER_DATA = '<p>name: californiaLuv</p>'
+
+export const DangerouslySetInnerHTMLComponent = () => {
+  const sanitizerInfo = {__html: DOMPurify.sanitize(SERVER_DATA)}
+  // 🙆‍♂️ Good
+  return <div dangerouslySetInnerHTML={sanitizerInfo} />
+};
+
+{% endhighlight %}
 
 ## 코드 해석
 
@@ -213,9 +243,3 @@ dangerouslySetInnerHTML을 사용할 때, 사용자 입력이 포함된 HTML을 
 
 그러므로 HTML Sanitizer(HTML 필터링) 라이브러리를 활용하는 것은 dangerouslySetInnerHTML 속성을 사용할 때 중요한 보안적인 조치가 된다. 
 HTML Sanitizer는 입력된 HTML에서 안전하지 않은 요소나 스크립트를 제거하거나 이스케이프하여 XSS 공격을 방지하는 역할을 하며 이를 통해 사용자가 입력한 HTML을 안전하게 처리할 수 있다.
-
-
-
-
-
-
