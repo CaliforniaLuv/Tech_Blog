@@ -194,36 +194,6 @@ export const ListKey = ({ data }: ListKeyFailProps) => {
 
 # Raw HTML 코드의 위험성 방지하기
 
-## ❌ XSS 공격에 취약한 코드
-
-{% highlight javascript %}
-
-const SERVER_DATA = '<p>name: californiaLuv</p>'
-
-export const DangerouslySetInnerHTMLComponentFail = () => {
-  const markup = {__html: SERVER_DATA}
-  // 🙅‍♂️ Bad
-  return <div dangerouslySetInnerHTML={markup} />
-};
-
-{% endhighlight %}
-
-
-## ✅ dangerouslySetInnerHTML 및 보안 라이브러리 활용하기
-
-{% highlight javascript %}
-
-import DOMPurify from 'dompurify';
-
-const SERVER_DATA = '<p>name: californiaLuv</p>'
-
-export const DangerouslySetInnerHTMLComponent = () => {
-  const sanitizerInfo = {__html: DOMPurify.sanitize(SERVER_DATA)}
-  // 🙆‍♂️ Good
-  return <div dangerouslySetInnerHTML={sanitizerInfo} />
-};
-
-{% endhighlight %}
 
 ## 코드 해석
 
