@@ -33,7 +33,9 @@ ChatGPT에서 API를 지원한다는 사실을 이미 알고 있었기에, API �
 대충 429 상태 에러코드는 비용 크레딧 문제에 관련된 내용이였고, 머릿속에서 다음과 같은 생각 회로가 그려졌다.
 
 ```
+
 결제가 안 된 계정을 사용 → STT API 및 채팅 API 연동 → 채팅 API에서 429 상태 코드 발생 → 혹시 이거 유료 버전만 지원하는 건가?!!!
+
 ```
 
 의심이 들어 OpenAPI의 서비스 비용 정보를 확인해보니, STT와 채팅 기능은 모두 유료였다. 나는 지금까지 OpenAPI 측에서 낮은 버전은 무료로 제공해줄 거라고 막연히 생각하고 있었는데(=놀부 심보), 사실 API 서비스는 엄연히 유료였다.
@@ -129,13 +131,13 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
   - 마이크 스트림을 확인한 후 MediaRecorder 객체 생성
   - start()를 호출하여 녹음 시작
   - 녹음되는 오디오 데이터를 localAudioChunks 배열에 저장
-
+ 
 - stopRecording()
   - stop()을 호출하여 녹음 중지
   - onstop 이벤트에서 audioChunks를 Blob으로 변환
   - 변환된 오디오 파일을 서버에 업로드 (uploadAudio(audioBlob))
   - audioChunks를 초기화하여 다음 녹음을 준비
-
+ 
 - recordingStatus는 ```녹음 시작```, ```녹음 중```, ```API 응답 대기``` 상태로 이미지를 표현하고 있다.(Gif 참고)
 
 ## 녹음 파일 데이터 STT API 요청
@@ -233,8 +235,7 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
   - formData에서 "audio" 키를 가져와 ___파일 객체(File)___ 로 변환
   - 파일이 없거나 크기가 0이면 오류 응답 반환 (AUDIO_FILE_NOT_FOUND)
   - 오디오 파일을 arrayBuffer()로 변환하여 바이너리 데이터로 준비
-
-
+ 
 - Google STT API 호출
   - Google Speech-to-Text(STT) 클라이언트 초기화
   - 오디오 데이터를 Base64 문자열로 변환하여 request.audio.content에 저장
@@ -242,8 +243,7 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
   - client.recognize(request)를 호출하여 음성을 텍스트로 변환
   - 결과에서 가장 확률 높은 변환 텍스트를 추출(speechToText)
   - 변환된 텍스트가 없으면 오류 응답 반환 (AUDIO_API_ERROR)
-
-
+ 
 - Google Generative AI(Chat) 호출
   - Google AI Chat 클라이언트 초기화 (GoogleGenerativeAI)
   - Gemini 1.5 Flash 모델을 사용하여 speechToText를 기반으로 AI 응답 요청
@@ -312,18 +312,17 @@ const [synth, setSynth] = useState<SpeechSynthesis | null>(null);
   - pitch: 음성의 높낮이(1 기본값) 조절
   - rate: 음성 속도(1 기본값) 조절
   - volume: 음성 크기(1 기본값) 조절
-
-
+ 
 - useEffect를 활용한 음성 출력 (synth.speak)
   - state.sender 값이 있을 때, synth가 존재하면 음성 출력 실행
   - SpeechSynthesisUtterance 객체를 생성하여 ___텍스트(state.sender)___ 를 음성으로 변환
   - 사용자가 선택한 ___음성(voice), 피치(pitch), 속도(rate), 볼륨(volume)___ 을 설정
   - synth.speak(wordsToSay)를 호출하여 음성 재생
   - useEffect 클린업 함수에서 synth.cancel()을 실행하여 음성을 중단
-
+ 
 - synth 객체 초기화 (useEffect)
   - window.speechSynthesis를 가져와 음성 합성 객체(synth)를 설정
-
+ 
 - 음성 설정 변경 핸들러
   - 음성 변경 (handleVoiceChange)
      - speechSynthesis.getVoices()를 호출하여 사용 가능한 음성 목록 조회
