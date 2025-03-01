@@ -128,11 +128,13 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
 ![2025-03-015 54 31-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ac99e1e3-9573-4aa5-b2de-511aa06baabc)
 
 - startRecording()
+  
   - 마이크 스트림을 확인한 후 MediaRecorder 객체 생성
   - start()를 호출하여 녹음 시작
   - 녹음되는 오디오 데이터를 localAudioChunks 배열에 저장
     
 - stopRecording()
+  
   - stop()을 호출하여 녹음 중지
   - onstop 이벤트에서 audioChunks를 Blob으로 변환
   - 변환된 오디오 파일을 서버에 업로드 (uploadAudio(audioBlob))
