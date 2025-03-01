@@ -313,17 +313,18 @@ const [synth, setSynth] = useState<SpeechSynthesis | null>(null);
   - rate: 음성 속도(1 기본값) 조절
   - volume: 음성 크기(1 기본값) 조절
 
- - useEffect를 활용한 음성 출력 (synth.speak)
+
+- useEffect를 활용한 음성 출력 (synth.speak)
   - state.sender 값이 있을 때, synth가 존재하면 음성 출력 실행
   - SpeechSynthesisUtterance 객체를 생성하여 ___텍스트(state.sender)___ 를 음성으로 변환
   - 사용자가 선택한 ___음성(voice), 피치(pitch), 속도(rate), 볼륨(volume)___ 을 설정
   - synth.speak(wordsToSay)를 호출하여 음성 재생
   - useEffect 클린업 함수에서 synth.cancel()을 실행하여 음성을 중단
 
- - synth 객체 초기화 (useEffect)
+- synth 객체 초기화 (useEffect)
   - window.speechSynthesis를 가져와 음성 합성 객체(synth)를 설정
 
- - 음성 설정 변경 핸들러
+- 음성 설정 변경 핸들러
   - 음성 변경 (handleVoiceChange)
      - speechSynthesis.getVoices()를 호출하여 사용 가능한 음성 목록 조회
      - 사용자가 선택한 음성을 찾아서 voice 상태 업데이트.
