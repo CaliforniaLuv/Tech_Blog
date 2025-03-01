@@ -65,8 +65,11 @@ Google AI의 STT 서비스가 음성 데이터를 텍스트로 변환한 후, �
 Gemini에서 생성한 응답이 다시 사용자의 화면에 표시되거나, Web Speech API를 통해 음성으로 출력될 수 있다.
 
 ___MediaStream API___: 사용자의 음성을 캡처
+
 ___Google AI STT___: 음성을 텍스트로 변환
+
 ___Gemini AI___: 질문을 분석하고 답변 생성
+
 ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
 
 즉, 사용자가 음성으로 질문하면 이를 STT로 변환하고, AI가 분석하여 응답을 제공하는 구조를 생성하였다.
@@ -227,10 +230,11 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
 해당 코드들은 Next.js를 사용하기 때문에 별도의 Node.js 백엔드 서버를 구축할 필요 없이, 녹음된 데이터를 그대로 폼(form)에 담아 전달하는 방식으로 구현했다.
 
 - 오디오 파일 확인 및 변환
-  - formData에서 "audio" 키를 가져와 ___파일 객체(File)___로 변환
+  - formData에서 "audio" 키를 가져와 ___파일 객체(File)___ 로 변환
   - 파일이 없거나 크기가 0이면 오류 응답 반환 (AUDIO_FILE_NOT_FOUND)
   - 오디오 파일을 arrayBuffer()로 변환하여 바이너리 데이터로 준비
- 
+
+
 - Google STT API 호출
   - Google Speech-to-Text(STT) 클라이언트 초기화
   - 오디오 데이터를 Base64 문자열로 변환하여 request.audio.content에 저장
@@ -243,7 +247,7 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
 - Google Generative AI(Chat) 호출
   - Google AI Chat 클라이언트 초기화 (GoogleGenerativeAI)
   - Gemini 1.5 Flash 모델을 사용하여 speechToText를 기반으로 AI 응답 요청
-  - 응답을 받아 텍스트 변환 후, ___고유 요청 ID(uniqueChatRequestId)___를 생성하여 반환
+  - 응답을 받아 텍스트 변환 후, ___고유 요청 ID(uniqueChatRequestId)___ 를 생성하여 반환
   - AI 응답이 성공하면 200 OK 응답 반환
   - AI 응답 중 오류 발생 시, 오류 메시지를 포함한 응답 반환 (CHAT_API_ERROR)
 
@@ -303,7 +307,7 @@ const [synth, setSynth] = useState<SpeechSynthesis | null>(null);
 ### 코드 구현 정리
 
 - 활용되는 상태 변수 (useState)
-  - synth: ___음성 합성 객체(SpeechSynthesis)___를 저장
+  - synth: ___음성 합성 객체(SpeechSynthesis)___ 를 저장
   - voice: 선택된 음성(SpeechSynthesisVoice) 저장
   - pitch: 음성의 높낮이(1 기본값) 조절
   - rate: 음성 속도(1 기본값) 조절
@@ -311,8 +315,8 @@ const [synth, setSynth] = useState<SpeechSynthesis | null>(null);
 
  - useEffect를 활용한 음성 출력 (synth.speak)
   - state.sender 값이 있을 때, synth가 존재하면 음성 출력 실행
-  - SpeechSynthesisUtterance 객체를 생성하여 ___텍스트(state.sender)___를 음성으로 변환
-  - 사용자가 선택한 ___음성(voice), 피치(pitch), 속도(rate), 볼륨(volume)___을 설정
+  - SpeechSynthesisUtterance 객체를 생성하여 ___텍스트(state.sender)___ 를 음성으로 변환
+  - 사용자가 선택한 ___음성(voice), 피치(pitch), 속도(rate), 볼륨(volume)___ 을 설정
   - synth.speak(wordsToSay)를 호출하여 음성 재생
   - useEffect 클린업 함수에서 synth.cancel()을 실행하여 음성을 중단
 
