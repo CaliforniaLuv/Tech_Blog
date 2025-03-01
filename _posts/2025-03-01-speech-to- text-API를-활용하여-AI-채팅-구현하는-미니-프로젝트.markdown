@@ -130,14 +130,12 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
 - startRecording()
   - 마이크 스트림을 확인한 후 MediaRecorder 객체 생성
   - start()를 호출하여 녹음 시작
-  - 녹음되는 오디오 데이터를 localAudioChunks 배열에 저장
-<br>
+  - 녹음되는 오디오 데이터를 localAudioChunks 배열에 저장 <br>
 - stopRecording()
   - stop()을 호출하여 녹음 중지
   - onstop 이벤트에서 audioChunks를 Blob으로 변환
   - 변환된 오디오 파일을 서버에 업로드 (uploadAudio(audioBlob))
   - audioChunks를 초기화하여 다음 녹음을 준비 <br>
-<br>
 - recordingStatus는 ```녹음 시작```, ```녹음 중```, ```API 응답 대기``` 상태로 이미지를 표현하고 있다.(Gif 참고)
 
 ## 녹음 파일 데이터 STT API 요청
@@ -234,16 +232,14 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
 - 오디오 파일 확인 및 변환
   - formData에서 "audio" 키를 가져와 ___파일 객체(File)___ 로 변환
   - 파일이 없거나 크기가 0이면 오류 응답 반환 (AUDIO_FILE_NOT_FOUND)
-  - 오디오 파일을 arrayBuffer()로 변환하여 바이너리 데이터로 준비
-     
+  - 오디오 파일을 arrayBuffer()로 변환하여 바이너리 데이터로 준비 <br>
 - Google STT API 호출
   - Google Speech-to-Text(STT) 클라이언트 초기화
   - 오디오 데이터를 Base64 문자열로 변환하여 request.audio.content에 저장
   - 오디오 파일을 arrayBuffer()로 변환하여 바이너리 데이터로 준비
   - client.recognize(request)를 호출하여 음성을 텍스트로 변환
   - 결과에서 가장 확률 높은 변환 텍스트를 추출(speechToText)
-  - 변환된 텍스트가 없으면 오류 응답 반환 (AUDIO_API_ERROR)
-    
+  - 변환된 텍스트가 없으면 오류 응답 반환 (AUDIO_API_ERROR) <br>
 - Google Generative AI(Chat) 호출
   - Google AI Chat 클라이언트 초기화 (GoogleGenerativeAI)
   - Gemini 1.5 Flash 모델을 사용하여 speechToText를 기반으로 AI 응답 요청
@@ -311,18 +307,15 @@ const [synth, setSynth] = useState<SpeechSynthesis | null>(null);
   - voice: 선택된 음성(SpeechSynthesisVoice) 저장
   - pitch: 음성의 높낮이(1 기본값) 조절
   - rate: 음성 속도(1 기본값) 조절
-  - volume: 음성 크기(1 기본값) 조절
-    
+  - volume: 음성 크기(1 기본값) 조절 <br>
 - useEffect를 활용한 음성 출력 (synth.speak)
   - state.sender 값이 있을 때, synth가 존재하면 음성 출력 실행
   - SpeechSynthesisUtterance 객체를 생성하여 ___텍스트(state.sender)___ 를 음성으로 변환
   - 사용자가 선택한 ___음성(voice), 피치(pitch), 속도(rate), 볼륨(volume)___ 을 설정
   - synth.speak(wordsToSay)를 호출하여 음성 재생
-  - useEffect 클린업 함수에서 synth.cancel()을 실행하여 음성을 중단
-    
+  - useEffect 클린업 함수에서 synth.cancel()을 실행하여 음성을 중단 <br>
 - synth 객체 초기화 (useEffect)
-  - window.speechSynthesis를 가져와 음성 합성 객체(synth)를 설정
-    
+  - window.speechSynthesis를 가져와 음성 합성 객체(synth)를 설정 <br>
 - 음성 설정 변경 핸들러
   - 음성 변경 (handleVoiceChange)
      - speechSynthesis.getVoices()를 호출하여 사용 가능한 음성 목록 조회
