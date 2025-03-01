@@ -37,7 +37,7 @@ ChatGPT에서 API를 지원한다는 사실을 이미 알고 있었기에, API �
 결제가 안 된 계정을 사용 → STT API 및 채팅 API 연동 → 채팅 API에서 429 상태 코드 발생 → 혹시 이거 유료 버전만 지원하는 건가?!!!
 
 ```
-
+<br>
 의심이 들어 OpenAPI의 서비스 비용 정보를 확인해보니, STT와 채팅 기능은 모두 유료였다. 나는 지금까지 OpenAPI 측에서 낮은 버전은 무료로 제공해줄 거라고 막연히 생각하고 있었는데(=놀부 심보), 사실 API 서비스는 엄연히 유료였다.
 결국, 코드를 작성하기 전에 조금만 더 사전 분석을 철저히 했더라면 이런 어이없는 삽질을 하지 않았을 텐데… 😅
 
@@ -131,17 +131,13 @@ ___Web Speech API___: 생성된 답변을 음성으로 변환 가능
   - 마이크 스트림을 확인한 후 MediaRecorder 객체 생성
   - start()를 호출하여 녹음 시작
   - 녹음되는 오디오 데이터를 localAudioChunks 배열에 저장
-
 <br>
-    
 - stopRecording()
   - stop()을 호출하여 녹음 중지
   - onstop 이벤트에서 audioChunks를 Blob으로 변환
   - 변환된 오디오 파일을 서버에 업로드 (uploadAudio(audioBlob))
   - audioChunks를 초기화하여 다음 녹음을 준비 <br>
-
 <br>
-    
 - recordingStatus는 ```녹음 시작```, ```녹음 중```, ```API 응답 대기``` 상태로 이미지를 표현하고 있다.(Gif 참고)
 
 ## 녹음 파일 데이터 STT API 요청
