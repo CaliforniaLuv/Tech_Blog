@@ -4,6 +4,9 @@ url: "https://californialuv.github.io" # the base hostname & protocol for your s
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM
+  gfm_quirks: [paragraph_end]
 permalink: pretty
 plugins:
   - jekyll-paginate
