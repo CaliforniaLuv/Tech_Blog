@@ -72,15 +72,15 @@ GitHub Actions, AWS, Vercel, Docker 등 다양한 환경과 쉽게 연동할 수
 
 ### doppler 회원가입 후 환경 변수 셋팅하기
 
-<img width="1484" alt="스크린샷 2025-03-19 오후 11 29 06" src="https://github.com/user-attachments/assets/51e8274c-ab95-4fb6-8c6d-8fdf692e2f3c" />
+<img width="1484" alt="스크린샷 2025-03-19 오후 11 29 06" src="https://github.com/user-attachments/assets/cc6a21ed-baaa-40c4-85d1-98e669e7a37c" />
 
-<img width="1518" alt="스크린샷 2025-03-19 오후 11 39 28" src="https://github.com/user-attachments/assets/14f24d3d-23d2-4481-b675-bbbd0dc60eec" />
+<img width="1518" alt="스크린샷 2025-03-19 오후 11 39 28" src="https://github.com/user-attachments/assets/5eb27166-0579-4240-baa7-a77f60777066" />
 *환경변수 셋팅된 화면*
 
 확실히 Dotenv Vault와 달리, 무료 계정에서도 각 프로젝트 환경과 하위 환경을 모두 커스텀할 수 있어 자유도가 높다.
 또한, 환경변수 설정하면서 직관적인 UI/UX 덕분에 사용자 편의성이 뛰어난 클라우드 서비스라고 느꼈다.
 
-<img width="295" alt="스크린샷 2025-03-19 오후 11 39 40" src="https://github.com/user-attachments/assets/76bc99da-45d1-44c4-b59c-1872c1ea715d" />
+<img width="295" alt="스크린샷 2025-03-19 오후 11 39 40" src="https://github.com/user-attachments/assets/369f0058-1f06-49f9-9c74-b04395ffd0c1" />
 *다양한 환경변수 타입 제공*
 
 환경변수 설정 시 문자열뿐만 아니라 JSON, UUID 등 다양한 형식도 지원하여 유연하게 활용할 수 있고, 등록하거나 수정시 히스토리도 있어 현황 파악에 매우 유용하다.
@@ -115,7 +115,7 @@ doppler login
 doppler setup
 ```
 
-![setup](https://github.com/user-attachments/assets/582d6f1f-c1b3-4171-9de7-6b666df084ec)
+![424554314-582d6f1f-c1b3-4171-9de7-6b666df084ec](https://github.com/user-attachments/assets/77bdc75c-a22c-43bb-8d03-baa712484ea0)
 
 Doppler 셋업 명령어를 입력하면, GIF 이미지처럼 연결할 프로젝트를 선택할 수 있는 옵션이 제공된다.
 
@@ -125,7 +125,7 @@ Doppler 셋업 명령어를 입력하면, GIF 이미지처럼 연결할 프로�
 doppler run -- printenv | grep "환경변수명"
 ```
 
-<img width="565" alt="스크린샷 2025-03-19 오후 11 53 36" src="https://github.com/user-attachments/assets/25c61dbd-b3f6-46b8-b982-30d1d12e96d4" />
+<img width="565" alt="스크린샷 2025-03-19 오후 11 53 36" src="https://github.com/user-attachments/assets/3632b7ab-c3b1-4121-9e29-c56f723f0ffb" />
 *설정한 환경변수 정보*
 
 터미널 창에 위 사진처럼 내가 Doppler 클라우드 사이트에서 등록한 환경변수가 찍혀 있는 것을 확인할 수 있다.
