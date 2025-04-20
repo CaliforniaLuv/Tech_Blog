@@ -20,7 +20,7 @@ tags:   project
 
 ```
 
-<img width="825" alt="1" src="https://github.com/user-attachments/assets/10c80873-6617-48fe-b9ef-8d21588b2bc6" />
+![캡쳐_이미지](/images/2025-03-22/1.png)
 *📎 누가 어떤 값을 설정했는지 파악이 어려움*
 
 결론은 현재처럼 ___Confluence___에서 관리하고 ___GitHub Actions___에서 따로 설정하면 관리 포인트가 분산되므로 중앙 관리 시스템이 필요하다고 판단되었다.
@@ -37,7 +37,7 @@ tags:   project
 
 # Dotenv Vault
 
-![2](https://github.com/user-attachments/assets/3417ce64-2e38-4cff-ba68-714ab38298f8)
+![캡쳐 이미지2](/images/2025-03-22/2.png)
 
 Dotenv Vault는 .env 파일을 암호화하고 안전하게 공유할 수 있도록 도와주는 환경 변수 관리 도구이며,
 기존의 .env 파일을 그대로 사용하면서 보안을 강화할 수 있도록 설계되었다.
@@ -46,7 +46,7 @@ Dotenv Vault는 .env 파일을 암호화하고 안전하게 공유할 수 있도
 
 해당 서비스의 테스트 셋팅 중 우리는 문제를 빨리 발견하였다.
 
-<img width="1042" alt="3" src="https://github.com/user-attachments/assets/0680f5dc-6ace-486f-9ab9-6e55b482b3ca" />
+![캡쳐 이미지3](/images/2025-03-22/3.png)
 
 Dotenv Vault 파일을 생성하면 기본적으로 development, staging, production 환경이 자동으로 추가되는데, 이걸 직접 수정하려면 유료 플랜($4/월)이 필요하다.
 
@@ -57,7 +57,7 @@ Dotenv Vault 파일을 생성하면 기본적으로 development, staging, produc
 
 # Doppler
 
-![4](https://github.com/user-attachments/assets/adfdd582-bac6-4db8-a39a-539ebfd5d1bc)
+![캡쳐 이미지4](/images/2025-03-22/4.png)
 
 Doppler는 환경 변수와 비밀 키(Secrets)를 중앙에서 안전하게 관리할 수 있도록 도와주는 Secrets Manager이다.
 GitHub Actions, AWS, Vercel, Docker 등 다양한 환경과 쉽게 연동할 수 있어서 개발자들이 환경 변수를 편리하게 관리할 수 있도록 설계되었다.
@@ -72,15 +72,15 @@ GitHub Actions, AWS, Vercel, Docker 등 다양한 환경과 쉽게 연동할 수
 
 ### doppler 회원가입 후 환경 변수 셋팅하기
 
-<img width="1484" alt="5" src="https://github.com/user-attachments/assets/8495b2f6-4a5d-4c6d-b7ec-56fb12c63d82" />
+![캡쳐 이미지5](/images/2025-03-22/5.png)
 
-<img width="1518" alt="6" src="https://github.com/user-attachments/assets/c145e2eb-76eb-4b66-a4da-135c1d34a9f0" />
+![캡쳐 이미지6](/images/2025-03-22/6.png)
 *환경변수 셋팅된 화면*
 
 확실히 Dotenv Vault와 달리, 무료 계정에서도 각 프로젝트 환경과 하위 환경을 모두 커스텀할 수 있어 자유도가 높다.
 또한, 환경변수 설정하면서 직관적인 UI/UX 덕분에 사용자 편의성이 뛰어난 클라우드 서비스라고 느꼈다.
 
-<img width="295" alt="7" src="https://github.com/user-attachments/assets/bf5f9c2e-ce5f-4b76-a058-e5daf1a6e8fd" />
+![캡쳐 이미지7](/images/2025-03-22/7.png)
 *다양한 환경변수 타입 제공*
 
 환경변수 설정 시 문자열뿐만 아니라 JSON, UUID 등 다양한 형식도 지원하여 유연하게 활용할 수 있고, 등록하거나 수정시 히스토리도 있어 현황 파악에 매우 유용하다.
@@ -115,7 +115,7 @@ doppler login
 doppler setup
 ```
 
-![8](https://github.com/user-attachments/assets/7fdc34f8-f187-457d-a7a9-7b3f2301d029)
+![캡쳐 이미지8](/images/2025-03-22/8.gif)
 
 Doppler 셋업 명령어를 입력하면, GIF 이미지처럼 연결할 프로젝트를 선택할 수 있는 옵션이 제공된다.
 
@@ -125,7 +125,7 @@ Doppler 셋업 명령어를 입력하면, GIF 이미지처럼 연결할 프로�
 doppler run -- printenv | grep "환경변수명"
 ```
 
-<img width="565" alt="9" src="https://github.com/user-attachments/assets/f516695b-8032-428f-bc33-9d32f8ea38cf" />
+![캡쳐 이미지9](/images/2025-03-22/9.png)
 
 터미널 창에 위 사진처럼 내가 Doppler 클라우드 사이트에서 등록한 환경변수가 찍혀 있는 것을 확인할 수 있다.
 
