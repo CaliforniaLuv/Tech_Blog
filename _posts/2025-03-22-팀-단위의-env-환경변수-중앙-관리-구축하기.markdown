@@ -135,7 +135,7 @@ doppler run -- printenv | grep "환경변수명"
 doppler run -- npm run dev
 ```
 
-이처럼 Next.js, React, Express 등 다른 프레임워크에서도 ```doppler run --```을 붙이면 환경 변수가 적용된 상태로 실행된다.
+이처럼 Next.js, React, Express 등 다른 프레임워크에서도 `doppler run --`을 붙이면 환경 변수가 적용된 상태로 실행된다.
 따라서 Doppler를 설정해두면 .env 파일을 생성하지 않고도 직접 변수를 주입할 수 있어, 별도로 .env 파일을 관리할 필요가 없다.
 
 
