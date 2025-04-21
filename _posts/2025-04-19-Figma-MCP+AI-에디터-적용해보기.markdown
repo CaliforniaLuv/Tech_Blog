@@ -118,7 +118,7 @@ Figma 디자인 요소 영역의 링크를 복사하여 Cursor AI 에디터에 �
 
 Figma-Context-MCP 라이브러리 이슈 글들을 찾아보니 내가 겪고 있는 동일한 [문제의 글](https://github.com/GLips/Figma-Context-MCP/issues/14)이 발견 되었다. 
 
-![캡쳐_이미지3](https://californialuv.github.io/Tech_Blog/images/2025-04-19/3 .png)
+![캡쳐_이미지3](https://californialuv.github.io/Tech_Blog/images/2025-04-19/3.png)
 *Github 이슈 글*
 
 확인 결과, 해당 라이브러리 제작자에 따르면
