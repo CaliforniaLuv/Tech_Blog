@@ -43,6 +43,8 @@ Figma와 AI 에디터를 연동해 사용하는 방법을 확인하여 이번 �
   }
 ```
 
+<br>
+
 설정을 완료했다면 아래와 같은 캡쳐 화면이 나타나며 녹색 알림불이 뜬 것은 MCP 서버가 정상적으로 동작 중이라는 것을 의미한다.
 
 ![캡쳐_이미지](https://californialuv.github.io/Tech_Blog/images/2025-04-19/1.png)
@@ -88,6 +90,7 @@ Figma 디자인 요소 영역의 링크를 복사하여 Cursor AI 에디터에 �
 5. 아이콘 생성 시 예제 파일 참고
    - 참조 파일 경로: `/SampleIcon.tsx`
 ```
+<br>
 
 ### 🔎 확인된 주요 단점 및 제약
 - 상태/입력 의존 UI에 적용 난이도 높음
@@ -116,7 +119,7 @@ Figma 디자인 요소 영역의 링크를 복사하여 Cursor AI 에디터에 �
 Figma-Context-MCP 라이브러리 이슈 글들을 찾아보니 내가 겪고 있는 동일한 [문제의 글](https://github.com/GLips/Figma-Context-MCP/issues/14)이 발견 되었다. 
 
 ![캡쳐_이미지3](https://californialuv.github.io/Tech_Blog/images/2025-04-19/3 .png)
-* Github 이슈 글*
+*Github 이슈 글*
 
 확인 결과, 해당 라이브러리 제작자에 따르면
 "변수를 검색하는 API는 Figma 엔터프라이즈 플랜 구독자에게만 제공된다"고 한다.
