@@ -2,7 +2,7 @@
 layout: post
 title:  React2Shell 보안 이슈
 date:   2025-12-28
-image:  react.jpg
+image:  React.png
 tags:   tech
 ---
 
