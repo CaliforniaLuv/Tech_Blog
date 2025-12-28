@@ -14,7 +14,7 @@ tags:   tech
 
 ---
 
-# 버그 리포트 공개 후 대응
+# 버그 리포트 발표 후 대응
 
 ![캡쳐_이미지1](https://californialuv.github.io/Tech_Blog/images/2025-12-28/1.png)
 *React2Shel 이슈*
