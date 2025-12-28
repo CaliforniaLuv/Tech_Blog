@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  팀 단위의 env 환경변수 중앙 관라 구축하기
+title:  팀 단위의 env 환경변수 중앙 관리 구축하기
 date:   2025-03-22
 image:  lifestyle.jpeg
 tags:   project
