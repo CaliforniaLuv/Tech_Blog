@@ -3,7 +3,7 @@ layout: post
 title:  React2Shell 보안 이슈
 date:   2025-12-28
 image:  React.png
-tags:   tech
+tags:   REACT
 ---
 
 지난 12월 3일, React 공식 블로그를 통해 React Server Components(RSC)의 치명적인 보안 취약점인 CVE-2025-55182 관한 공지가 [포스팅](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)되었다.
