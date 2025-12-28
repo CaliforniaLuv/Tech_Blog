@@ -46,7 +46,7 @@ React 개발팀의 해결책은 버전 업데이트 요구를 발표하였다.
 ![캡쳐_이미지2](https://californialuv.github.io/Tech_Blog/images/2025-12-28/4.png)
 *버그 최초 발견자 lachlan2k Poc 문서*
 
-최초 제보자인 ___lachlan2k___ 가 깃허브에 공개한 PoC 코드를 바탕으로, 해당 취약점을 통해 React 서버의 .env 파일 내용이 유출되거나 실행될 수 있는지 직접 검증해 보았다.
+최초 제보자인 ___lachlan2k___ 가 [깃허브에 공개한 PoC 코드](https://github.com/lachlan2k/React2Shell-CVE-2025-55182-original-poc)를 바탕으로, 해당 취약점을 통해 React 서버의 .env 파일 내용이 유출되거나 실행될 수 있는지 직접 검증해 보았다.
 
 예제 코드는 아래와 같다.
 
