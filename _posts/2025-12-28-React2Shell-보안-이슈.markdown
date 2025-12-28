@@ -118,11 +118,11 @@ exploitNext("http://localhost:3000");
 
 환경변수 전부 출력되며 특히 env 셋팅한 환경변수 까지 유출된 것을 볼 수 있다... (ㄷㄷ)
 
-여기서 궁금한건 예제 코드가 어떤 형태길래 노출된 것일까? 
+여기서 궁금한 건 예제 코드가 어떤 형태이길래 노출된 것일까? 
 
 ## Flight Protocol
 
-React Server Components가 Flight payload를 신뢰하고 역직렬화하는 과정을 해커들은 악용한 것이다.
+React Server Components가 Flight payload를 신뢰하고 역직렬화하는 과정을 해커들은 악용할 수 있게 된다.
 
 겉보기엔 그냥 payload가 단순 객체처럼 보이지만, 실제로는 React RSC 내부 포맷(Flight Protocol)에 맞춘 의도적으로 조작된 데이터 구조다.
 
@@ -159,7 +159,7 @@ Function("원하는 코드")()
 ```
 <br>
 
-그러므로 _prefix 부분의 env 환경변수 까지 역질렬화 하여 노츨된 것을 확인 할 수가 있다.
+그러므로 _prefix 부분의 env 환경변수 까지 역질렬화 하여 노출된 것을 확인 할 수가 있다.
 
 다시 돌아가 React 서버 터미널에 process.env 전체가 노출된다는 것은 외부 요청이 서버 실행 컨텍스트에 영향을 미칠 수 있음을 의미한다.
 
