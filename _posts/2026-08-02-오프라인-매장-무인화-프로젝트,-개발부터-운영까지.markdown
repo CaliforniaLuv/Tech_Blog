@@ -70,7 +70,7 @@ IT와 IoT에 대한 다양한 지식이 복합적으로 요구될 것이라는 �
 
 네이티브 앱 기반인 React Naitive로 개발을 할지, 웹앱 중점 하이브리드 앱인 Capacitor 중 무엇이 선택할지 분석을 해보았다.
 
-![분석표](https://californialuv.github.io/Tech_Blog/images/2026-08-02/스크린샷_1.png)
+![분석표](https://californialuv.github.io/Tech_Blog/images/2026-08-02/analysis-table_1.png)
 
 위 토대로 어느 환경이 더 현명할 지 고민한 결과, 나의 최종 선택은 ___Capacitor___ 였다
 
