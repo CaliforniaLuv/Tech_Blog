@@ -109,6 +109,7 @@ React SPA 기반 웹 애플리케이션을 Native App Wrapper로 감싸는 방�
 
 아래처럼 각 path 별 최상위 layout 스케일링 작업 코드를 작성하였다.
 
+{% raw %}
 {% highlight js %}
 
 const DESIGN_WIDTH = 2160;
@@ -122,9 +123,9 @@ export const KioskLayout = ({ children }: { children: ReactNode }) => {
       <div
         className="absolute left-0 top-0 bg-[#fafafa]"
         style={{
-          width: ${DESIGN_WIDTH}px,
-          height: ${DESIGN_HEIGHT}px,
-          transform: translate(${offsetX}px, ${offsetY}px) scale(${scale}),
+          width: `${DESIGN_WIDTH}px`,
+          height: `${DESIGN_HEIGHT}px`,
+          transform: `translate(${offsetX}px, ${offsetY}px) scale(${scale})`,
           transformOrigin: "top left",
         }}
       >
@@ -135,6 +136,7 @@ export const KioskLayout = ({ children }: { children: ReactNode }) => {
 };
 
 {% endhighlight %}
+{% endraw %}
 
 
 
