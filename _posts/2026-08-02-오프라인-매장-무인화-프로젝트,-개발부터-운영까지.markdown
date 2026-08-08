@@ -122,9 +122,9 @@ export const KioskLayout = ({ children }: { children: ReactNode }) => {
       <div
         className="absolute left-0 top-0 bg-[#fafafa]"
         style={{
-          width: `${DESIGN_WIDTH}px`,
-          height: `${DESIGN_HEIGHT}px`,
-          transform: `translate(${offsetX}px, ${offsetY}px) scale(${scale})`,
+          width: ${DESIGN_WIDTH}px,
+          height: ${DESIGN_HEIGHT}px,
+          transform: translate(${offsetX}px, ${offsetY}px) scale(${scale}),
           transformOrigin: "top left",
         }}
       >
