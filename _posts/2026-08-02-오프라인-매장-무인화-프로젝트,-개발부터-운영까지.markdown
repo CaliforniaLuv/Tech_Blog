@@ -116,18 +116,20 @@ const DESIGN_WIDTH = 2160;
 const DESIGN_HEIGHT = 3840;
 
 export const KioskLayout = ({ children }: { children: ReactNode }) => {
-  const { scale, offsetX, offsetY } = useFitTransform(); // 
+  const { scale, offsetX, offsetY } = useFitTransform(); 
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-black">
       <div
         className="absolute left-0 top-0 bg-[#fafafa]"
-        style={% raw %}{{{% endraw %}
-          width: `${DESIGN_WIDTH}px`,
-          height: `${DESIGN_HEIGHT}px`,
-          transform: `translate(${offsetX}px, ${offsetY}px) scale(${scale})`,
-          transformOrigin: "top left",
-        {% raw %}}}{% endraw %}
+        style={
+         {
+           width: `${DESIGN_WIDTH}px`,
+           height: `${DESIGN_HEIGHT}px`,
+           transform: `translate(${offsetX}px, ${offsetY}px) scale(${scale})`,
+           transformOrigin: "top left",
+         }
+        }
       >
         {children}
       </div>
