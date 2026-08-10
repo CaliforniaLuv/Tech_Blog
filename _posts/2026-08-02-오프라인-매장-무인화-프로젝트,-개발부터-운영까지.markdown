@@ -140,11 +140,9 @@ export const KioskLayout = ({ children }: { children: ReactNode }) => {
 
 {% endhighlight %}
 
-### 예약 앱과 kicc 결제 앱 간 App to App 연동
-
-![결제 플로우차트](https://californialuv.github.io/Tech_Blog/images/2026-08-02/payment-flow.png)
-*결제 진행 흐름도*
 <br>
+
+### 예약 앱과 kicc 결제 앱 간 App to App 연동
 
 이번 프로젝트에서 가장 어려웠던 부분은 결제 연동이었다.
 
@@ -186,7 +184,7 @@ if (!van.approved) throw { kind: "DECLINED" };
 
 다만 Intent만 쏜다고 바로 동작하지는 않았고, 두 가지 설정이 더 필요했다.
 
-1. 패키지 가시성(Android 11+) — 매니페스트에 ___<queries>___ 로 결제 앱 패키지를 선언해야 상대 앱을 찾을 수 있다.
+1. 패키지 가시성(Android 11+) — 매니페스트에 ___ <queries> ___ 로 결제 앱 패키지를 선언해야 상대 앱을 찾을 수 있다.
 
 {% highlight js %}
 
@@ -197,7 +195,7 @@ if (!van.approved) throw { kind: "DECLINED" };
 
 {% endhighlight %}
 
-2. 키오스크 잠금 모드 ___화이트리스트___ — 키오스크는 Lock Task Mode로 잠겨 있어 외부 앱 실행이 차단되는데, 결제 앱을 화이트리스트에 등록해야 결제 화면이 뜬다.
+2. 키오스크 잠금 모드 화이트리스트 — 키오스크는 ___Lock Task Mode___ 로 잠겨 있어 외부 앱 실행이 차단되는데, 결제 앱을 화이트리스트에 등록해야 결제 화면이 뜬다.
 
 {% highlight java %}
 
@@ -207,9 +205,13 @@ dpm.setLockTaskPackages(admin, new String[]{getPackageName(), KICC_PACKAGE});
 
 ### 카드 결제 VAN 승인시 위험 부분 발견
 
-(이미지 생성)
+![결제 플로우차트](https://californialuv.github.io/Tech_Blog/images/2026-08-02/payment-flow.png)
+*결제 진행 흐름도*
+<br>
 
 confirm 완료 처리 중 만약 API가 에러가 발생하게 되면 이용자가 ___이중 결제___ 를 할 수도 있는 크리티컬한 버그를 발견하였다.
+
+<br>
 
 이중 결제 시나리오
 
@@ -247,6 +249,8 @@ if (!approvedRef.current) {
 return await config.confirm({ ...approvedRef.current, params });
 
 {% endhighlight %}
+
+<br>
 
 개선 후 결제 시나리오
 
