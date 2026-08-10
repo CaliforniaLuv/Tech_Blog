@@ -11,7 +11,7 @@ tags:   Project
 프로젝트의 핵심은 기존 오프라인 스크린 골프 매장을 모두 무인화 시스템으로 전환하는 것이었다.
 
 프로젝트 내용을 듣자마자 가장 먼저 든 생각은 "IoT 기반 기술에 대한 이해가 많이 필요하겠는데?" 였다.
-전공이 전자공학이긴 하지만 IoT 분야를 다룬 지는 벌써 4~5년이 지났다. 이전 회사에서 인턴으로 근무할 
+전공이 전자공학이긴 하지만 IoT 분야를 다룬 지는 벌써 4~5년이 지났다. 이전 회사에서 인턴으로 근무할
 당시 잠시 관련 개발을 맡았던 [경험](https://www.imaeil.com/page/view/2021020312444739072)이 있었지만, 이후에는 줄곧 IT 서비스 개발 업무만 해왔기 때문이다.
 
 IT와 IoT에 대한 다양한 지식이 복합적으로 요구될 것이라는 생각에, 벌써부터 걱정이 앞서는 프로젝트는 정말 오랜만이었다.
@@ -23,7 +23,7 @@ IT와 IoT에 대한 다양한 지식이 복합적으로 요구될 것이라는 �
 
 # 초기 고민과 방향성
 
-## 무인화 매장 진짜 괜찮은게 맞을까..?
+## 1-1 무인화 매장 진짜 괜찮은게 맞을까..?
 
 ![골프 이미지1](https://californialuv.github.io/Tech_Blog/images/2026-08-02/royal-golf.jpeg)
 
@@ -44,24 +44,24 @@ IT와 IoT에 대한 다양한 지식이 복합적으로 요구될 것이라는 �
 마지막 네 번째 비용과 매출, 단기적으로는 매니저 인력을 줄여 인건비를 절감할 수 있겠지만, 장기적으로 고객 경험이 저하되어 매출에 영향을 미치지는 않을지 우려가 들었다.
 
 결국 우리 매장 서비스는 '사치스러움'이 가장 큰 무기였는데 무인화는 '가성비'라는 이미지로 뒤바뀌게 될 것이다.
-뭐 근데,, 이런 걱정들을 백날 수백 번 해봤자 나 같은 말단 직원이 건의하는 건 크게 영향도 없을 것 같다. 
+뭐 근데,, 이런 걱정들을 백날 수백 번 해봤자 나 같은 말단 직원이 건의하는 건 크게 영향도 없을 것 같다.
 
 임원분들은 나보다 더 넓은 관점에서 사업의 방향성과 목표를 바라보고 있겠지..? 어쩌면 내가 현장에서 보이는
 근시적인 변화만을 바라보며 걱정하고 있는 것일 수도 있다는 생각이 들기도 하다.
 
-결국 내가 할 수 있는 일은 프로젝트의 방향을 의심하는 것이 아니라, 
+결국 내가 할 수 있는 일은 프로젝트의 방향을 의심하는 것이 아니라,
 정해진 목표 안에서 오프라인 매장 무인화 서비스 만들기 위해 최선을 다하는 것이라고 생각하며 다시 개발에 집중하기로 했다.
 
 <br>
 
-## 웹앱 기반으로 갈까? 네이티브로 갈까?
+## 1-2 웹앱 기반으로 갈까? 네이티브로 갈까?
 
 ![비교](https://californialuv.github.io/Tech_Blog/images/2026-08-02/versus.png)
 
-다행히 내가 맡게 된 역할은 IoT 시스템과 연동해 매장 타석의 TV, PC, 출입문을 제어하는 기능을 개발하는 것이 아니라, 
+다행히 내가 맡게 된 역할은 IoT 시스템과 연동해 매장 타석의 TV, PC, 출입문을 제어하는 기능을 개발하는 것이 아니라,
 키오스크와 패드를 통해 고객이 타석을 예약할 수 있는 애플리케이션을 개발하는 것이었다.
 
-매장에 설치되는 키오스크와 패드(태블릿)는 벤더 업체에서 제공하는 장비를 사용했고, 결제 시스템은 KICC(한국정보통신주식회사) 결제 리더기를 연동하는 구조였다. 
+매장에 설치되는 키오스크와 패드(태블릿)는 벤더 업체에서 제공하는 장비를 사용했고, 결제 시스템은 KICC(한국정보통신주식회사) 결제 리더기를 연동하는 구조였다.
 가장 먼저 고민한 부분은 어떤 기술 스택을 기반으로 애플리케이션을 개발할 것인가 였는데, 프로젝트는 매주 개발 현황을 공유해야 할 만큼 일정이 빠듯했으며
 네이티브 앱으로 개발하는 방법도 고려했지만, 당시 나에게는 개발 경험이 부족해 일정 리스크가 클 것 같았다.
 
@@ -76,47 +76,48 @@ React SPA 기반 웹 애플리케이션을 Native App Wrapper로 감싸는 방�
 
 - ___React Native의 장점을 활용하기 어려운 프로젝트___ , React Native는 다양한 모바일 UI 라이브러리와 생태계를 갖추고 있지만, 이번 프로젝트는 화면을 모두 Next.js로 구현하는 구조다.
   따라서 React Native의 UI 생태계를 활용할 일이 거의 없고, 오히려 웹 기술을 그대로 유지하면서 필요한 네이티브 기능만 사용할 수 있는 Capacitor가 더 적합했다.
-- ___웹과 네이티브 간 통신 구조가 더 단순___ , React Native는 웹뷰를 사용할 경우 Web → React Native → Native SDK(카메라, 결제 리더기 등)를 거쳐야 하지만, Capacitor는 Web → Native SDK 형태로 플러그인을 직접 호출할 수 있다. 
+- ___웹과 네이티브 간 통신 구조가 더 단순___ , React Native는 웹뷰를 사용할 경우 Web → React Native → Native SDK(카메라, 결제 리더기 등)를 거쳐야 하지만, Capacitor는 Web → Native SDK 형태로 플러그인을 직접 호출할 수 있다.
   통신 경로가 단순한 만큼 브리지 코드가 줄어들고 유지보수 측면에서도 유리하다고 판단했다.
-- ___이전 프로젝트 경험 영향___ ,  이전 예약 서비스 웹앱을 개발할 당시에는 스마트폰의 네이티브 기능을 사용할 때마다 postMessage를 이용해 웹(Next.js)과 네이티브 코드(React Native) 사이의 브리지 로직을 번거롭게 매번 구현해야 했다. 
+- ___이전 프로젝트 경험 영향___ ,  이전 예약 서비스 웹앱을 개발할 당시에는 스마트폰의 네이티브 기능을 사용할 때마다 postMessage를 이용해 웹(Next.js)과 네이티브 코드(React Native) 사이의 브리지 로직을 번거롭게 매번 구현해야 했다.
   Capacitor는 이러한 부분을 플러그인 API로 상당 부분 축소해 주기 때문에 개발 생산성을 높일 수 있을 것으로 기대했다.
 
 나에겐 웹 애플리케이션과 네이티브 SDK를 얼마나 간결하고 안정적으로 연결할 수 있느냐가 더 중요했기에 Capacitor 특성이 더 적합하다고 느껴졌다.
 
 # 시스템 구상
 
-## 키오스크/패드 예약 APP 아키텍처
+## 2-1 키오스크/패드 예약 APP 아키텍처
 
-![앱 아키텍처](https://californialuv.github.io/Tech_Blog/images/2026-08-02/app-architecture.png)
+![앱 아키텍처](https://californialuv.github.io/Tech_Blog/images/2026-08-02/app-architecture2.png)
 *앱 아키텍처*
+
+<br>
 
 ### 하나의 앱으로 두 디바이스 환경 대응하기
 
 키오스크와 패드, 두 환경에 맞춰 앱을 어떻게 구성할지 고민했다.
 
-두 환경을 각각 별도의 앱으로 개발한다면 작업량이 상당히 많아질 것으로 예상됐다. 현장 예약, 이용권 구매, 사전 예약 등 
+두 환경을 각각 별도의 앱으로 개발한다면 작업량이 상당히 많아질 것으로 예상됐다. 현장 예약, 이용권 구매, 사전 예약 등
 주요 기능의 구현 방식이 대부분 유사했기 때문에, 별도의 앱으로 나누는 것은 불필요하게 개발 공수를 늘리는 결과가 될 수 있었다.
 
-고민 끝에 ___하나의 앱에서 키오스크와 패드 환경을 모두 지원하는 방식___ 으로 방향을 잡았다.
+여러 방안을 숙고한 끝에 ___하나의 앱에서 키오스크와 패드 환경을 모두 지원하는 방식___ 으로 방향을 잡았다.
 
 웹뷰 기반으로 개발하는 구조였기 때문에 URL의 path를 '/kiosk', '/pad' 형태로 역할 분리하면 하나의 프로젝트 안에서
 각 환경을 명확하게 구분하면서도 공통 기능은 재사용할 수 있어 관리하기 편리하다고 판단했다.
-또한 키오스크와 패드는 화면 크기와 해상도가 서로 달랐기 때문에, 각 path에 해당하는 ___최상위 layout___ 에서 
+또한 키오스크와 패드는 화면 크기와 해상도가 서로 달랐기 때문에, 각 path에 해당하는 ___최상위 layout___ 에서
 환경별 스케일링 설정을 적용하여 디바이스 특성에 맞게 화면을 구성했다.
 
 ![path 플로우차트](https://californialuv.github.io/Tech_Blog/images/2026-08-02/path-flowchart.png)
 *path 흐름도*
 
-아래처럼 각 path 별 최상위 layout 스케일링 작업 코드를 작성하였다.
+<br>
 
-
-{% highlight js %}
+{% highlight jsx %}
 
 const DESIGN_WIDTH = 2160;
 const DESIGN_HEIGHT = 3840;
 
 export const KioskLayout = ({ children }: { children: ReactNode }) => {
-  const { scale, offsetX, offsetY } = useFitTransform(); 
+  const { scale, offsetX, offsetY } = useFitTransform(); // 해상도 리사이즈 계산 hook
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-black">
@@ -139,7 +140,127 @@ export const KioskLayout = ({ children }: { children: ReactNode }) => {
 
 {% endhighlight %}
 
+### 예약 앱과 kicc 결제 앱 간 App to App 연동
 
+![결제 플로우차트](https://californialuv.github.io/Tech_Blog/images/2026-08-02/payment-flow.png)
+*결제 진행 흐름도*
+<br>
 
+이번 프로젝트에서 가장 어려웠던 부분은 결제 연동이었다.
 
+Capacitor 브릿지 구현을 위해 Java를 사용해야 했는데, 학부 시절 이후 거의 다뤄보지 않아 문법과 구조를 다시 익히는 데 시간이 꽤 걸렸다.
+다행히 AI의 도움을 받아 Java 문법과 브릿지 구현 방식에 대해 수시로 질문하며 부족한 부분을 보완했고, 이를 바탕으로 내가 만든 앱과 KICC 결제 앱을 연동하는 방식을 구현했다.
+
+키오스크와 패드에는 KICC 결제 앱(EasyCardA)이 함께 설치되어 있다. 카드 리더기 제어는 전부 결제 앱이 담당하므로,
+우리 앱은 결제 시점에 결제 앱을 호출하고 승인 결과만 돌려받으면 된다. SDK를 붙이는 방식이 아니라 Android의 [Intent](https://developer.android.com/guide/components/intents-filters?hl=ko)를 이용한 App to App 방식이다.
+
+{% highlight java %}
+
+// 결제 앱의 결제 Activity를 명시적 Intent로 호출
+Intent intent = new Intent();
+intent.setClassName(PAYMENT_APP_PACKAGE, PAYMENT_ACTIVITY);
+intent.putExtra(/* 거래 유형, 금액 등 연동 규격 파라미터 */);
+startActivityForResult(call, intent, "paymentResult");
+
+{% endhighlight %}
+
+React(웹뷰)에서 이 네이티브 코드를 부를 수 있도록 Capacitor 커스텀 플러그인으로 감쌌고, 결제 앱이 돌려주는 응답의 결과 코드로 승인 성공 여부를 판정한다.
+
+{% highlight js %}
+
+// lib/native/kiccPayment.ts
+export interface KiccPaymentPlugin {
+  startPayment(input: { amount: number; tranNo: string }): Promise<{
+    approved: boolean; // 결과 코드 기반 승인 여부
+    raw: Record<string, string>; // 결제 앱 응답 원본 (승인번호 등)
+  }>;
+}
+const KiccPayment = registerPlugin<KiccPaymentPlugin>("KiccPayment");
+
+// src/paymentContainer.tsx
+const van = await KiccPayment.startPayment({ amount, tranNo });
+if (!van.approved) throw { kind: "DECLINED" };
+// van.raw의 승인 정보로 서버 확정 진행
+
+{% endhighlight %}
+
+다만 Intent만 쏜다고 바로 동작하지는 않았고, 두 가지 설정이 더 필요했다.
+
+1. 패키지 가시성(Android 11+) — 매니페스트에 ___<queries>___ 로 결제 앱 패키지를 선언해야 상대 앱을 찾을 수 있다.
+
+{% highlight js %}
+
+  <!-- KICC EasyCardA 앱-투-앱 호출용(Android 11+ 패키지 가시성). -->
+    <queries>
+        <package android:name="kr.co.kicc.easycarda" />
+    </queries>
+
+{% endhighlight %}
+
+2. 키오스크 잠금 모드 ___화이트리스트___ — 키오스크는 Lock Task Mode로 잠겨 있어 외부 앱 실행이 차단되는데, 결제 앱을 화이트리스트에 등록해야 결제 화면이 뜬다.
+
+{% highlight java %}
+
+dpm.setLockTaskPackages(admin, new String[]{getPackageName(), KICC_PACKAGE});
+
+{% endhighlight %}
+
+### 카드 결제 VAN 승인시 위험 부분 발견
+
+(이미지 생성)
+
+confirm 완료 처리 중 만약 API가 에러가 발생하게 되면 이용자가 ___이중 결제___ 를 할 수도 있는 크리티컬한 버그를 발견하였다.
+
+이중 결제 시나리오
+
+```
+1. 고객이 카드를 긁음 → startPayment → VAN 승인 성공 → 1차 출금 완료
+2. 이어서 confirm 호출 → 하지만 네트워크 순단 / 서버 타임아웃 / 5xx로 실패
+3. 화면엔 "결제 실패" 안내
+4. 처음부터 재실행 → prepare → startPayment 또 호출 → VAN 승인 성공 -> 2차 출금 발생
+5. 카드에 두 번 청구
+```
+
+<br>
+
+테스트 중 일부러 네트워크 오류를 발생시켜 해당 상황을 재현해봤다. 별도의 방어 로직 없이 단순히 재시도할 경우
+결제 플로우가 처음부터 다시 실행되면서 카드 승인이 한 번 더 발생했다. 즉, 35,000원짜리 결제를 재시도했을 뿐인데 
+고객의 카드에는 70,000원이 승인되는 문제가 발생할 수 있는 것이다.
+
+이를 해결하기 위해 VAN 승인 결과를 Ref 객체에 캐시해두고, confirm API 요청 과정에서 오류가 발생해 재시도하는 경우에는 카드 재승인 없이 서버의 결제 확정 과정만 다시 수행하도록 설계했다.
+
+{% highlight js %}
+
+// VAN 승인 성공 캐시. confirm 실패 후 재시도 시 동일 vanApproval 재사용(이중결제 방지).
+  const approvedRef = useRef<{ vanApproval: VanApproval; amount: number; context: TContext } | null>(
+    null,
+);
+
+if (!approvedRef.current) {
+  // 최초 시도에만 카드 승인 진행
+  const { amount, context } = await config.prepare(params);
+  const van = await KiccPayment.startPayment({ amount, tranNo });
+  if (!van.approved) throw { kind: "DECLINED" };
+  approvedRef.current = { vanApproval: normalizeVanApproval(van.raw), amount, context };
+}
+// 재시도 시 캐시된 승인 결과로 서버 확정만 재수행 → 이중결제 방지
+return await config.confirm({ ...approvedRef.current, params });
+
+{% endhighlight %}
+
+개선 후 결제 시나리오
+
+```
+1. 결제 화면에 에러 실패 되었다는 문구 발생
+2. 결제 버튼 다시 누름
+3. prepare, kicc 결제 승인 모두 건너가고 바로 confirm 과정 재시도
+```
+
+<br>
+
+다만 여기서 '뒤로가기'나 '처음으로' 버튼을 누르는 것은 사용자의 조작으로 발생하는 상황이기 때문에
+이 경우에는 결제를 처음부터 다시 진행해야 한다. 기존에 승인된 결제 건은 별도로 수동 환불 처리가 필요하며 이탈 시 경고 안내 모달을 띄우도록 처리했다.
+
+사실 위와 같은 상황이 실제로 발생할 가능성은 높지 않다. 하지만 결제 과정에서 작은 오류 하나만 발생해도 이용자에게 금전적인 피해로 이어질 수 있기 때문에
+가능한 예외 상황까지 고려해 꼼꼼하게 방어할 필요가 있다고 판단했다.
 
