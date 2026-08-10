@@ -81,6 +81,8 @@ React SPA 기반 웹 애플리케이션을 Native App Wrapper로 감싸는 방�
 - ___이전 프로젝트 경험 영향___ ,  이전 예약 서비스 웹앱을 개발할 당시에는 스마트폰의 네이티브 기능을 사용할 때마다 postMessage를 이용해 웹(Next.js)과 네이티브 코드(React Native) 사이의 브리지 로직을 번거롭게 매번 구현해야 했다.
   Capacitor는 이러한 부분을 플러그인 API로 상당 부분 축소해 주기 때문에 개발 생산성을 높일 수 있을 것으로 기대했다.
 
+<br>
+
 나에겐 웹 애플리케이션과 네이티브 SDK를 얼마나 간결하고 안정적으로 연결할 수 있느냐가 더 중요했기에 Capacitor 특성이 더 적합하다고 느껴졌다.
 
 # 시스템 구상
@@ -182,9 +184,11 @@ if (!van.approved) throw { kind: "DECLINED" };
 
 {% endhighlight %}
 
+<br>
+
 다만 Intent만 쏜다고 바로 동작하지는 않았고, 두 가지 설정이 더 필요했다.
 
-1. 패키지 가시성(Android 11+) — 매니페스트에 ___ <queries> ___ 로 결제 앱 패키지를 선언해야 상대 앱을 찾을 수 있다.
+1. 패키지 가시성(Android 11+) — 매니페스트에 <queries>로 결제 앱 패키지를 선언해야 상대 앱을 찾을 수 있다.
 
 {% highlight js %}
 
@@ -203,6 +207,8 @@ dpm.setLockTaskPackages(admin, new String[]{getPackageName(), KICC_PACKAGE});
 
 {% endhighlight %}
 
+<br>
+
 ### 카드 결제 VAN 승인시 위험 부분 발견
 
 ![결제 플로우차트](https://californialuv.github.io/Tech_Blog/images/2026-08-02/payment-flow.png)
@@ -210,8 +216,6 @@ dpm.setLockTaskPackages(admin, new String[]{getPackageName(), KICC_PACKAGE});
 <br>
 
 confirm 완료 처리 중 만약 API가 에러가 발생하게 되면 이용자가 ___이중 결제___ 를 할 수도 있는 크리티컬한 버그를 발견하였다.
-
-<br>
 
 이중 결제 시나리오
 
