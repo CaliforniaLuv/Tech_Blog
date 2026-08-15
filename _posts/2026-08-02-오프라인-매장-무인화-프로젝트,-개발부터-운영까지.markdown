@@ -382,7 +382,7 @@ ___WEB 배포 한 번___ 으로 전 매장 기기에 동시 반영되므로, 매
 
 ## 2-4 무인화 기기 간략 소개
 
-![키오스크와 패드](https://californialuv.github.io/Tech_Blog/images/2026-08-02device.png)
+![키오스크와 패드](https://californialuv.github.io/Tech_Blog/images/2026-08-02/device.png)
 
 벤더 업체에게 제공 받는 키오스크와 패드 이미지는 위와 같다.
 
@@ -394,10 +394,10 @@ ___WEB 배포 한 번___ 으로 전 매장 기기에 동시 반영되므로, 매
 
 ## 3-1 실외 스크린 골프장 시공 (2026-07-09)
 
-![실외 스크린 매장](https://californialuv.github.io/Tech_Blog/images/outdoor-store.png)
+![실외 스크린 매장](https://californialuv.github.io/Tech_Blog/images/2026-08-02/outdoor-store.png)
 
 <br>
 
 ## 3-2 실내 스크린 골프장 시공 (2026-08-14)
 
-![실내 스크린 매장](https://californialuv.github.io/Tech_Blog/images/interior-store.png)
+![실내 스크린 매장](https://californialuv.github.io/Tech_Blog/images/2026-08-02/interior-store.png)
