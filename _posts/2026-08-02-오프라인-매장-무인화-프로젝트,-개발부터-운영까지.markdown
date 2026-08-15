@@ -401,7 +401,7 @@ ___WEB 배포 한 번___ 으로 전 매장 기기에 동시 반영되므로, 매
 ![실외 스크린 매장](https://californialuv.github.io/Tech_Blog/images/2026-08-02/outdoor-store.png)
 
 ![키오스크](https://californialuv.github.io/Tech_Blog/images/2026-08-02/kiosk.jpeg)
-
+*키오스크 전면사진*
 
 실외 스크린 매장은 룸이라는 개념이 없어 키오스크만 설치하면 돠었다.
 
@@ -411,10 +411,50 @@ ___WEB 배포 한 번___ 으로 전 매장 기기에 동시 반영되므로, 매
 
 ![키오스크-예약-2](https://californialuv.github.io/Tech_Blog/images/2026-08-02/payment-2.gif)
 
-(무인화 설치 작업 중 찍은 영샹들 너무 밤티 감성이다;;)
+(너무 밤티 감성으로 촬영한 것 같다;)
 
 <br>
 
 ## 3-2 실내 스크린 골프장 시공 (2026-08-14)
 
 ![실내 스크린 매장](https://californialuv.github.io/Tech_Blog/images/2026-08-02/interior-store.png)
+
+![pad](https://californialuv.github.io/Tech_Blog/images/2026-08-02/pad.png)
+*벽면 패드와 이용 현황 패드*
+
+실내 스크린 매장은 각 룸이 공간적으로 연결되어 있어, 이전에 진행했던 실외 매장보다 시공 과정에서 손봐야 할 부분이 확실히 많았다.
+
+특히 타석 룸 내부에는 IoT 기반의 자동화 설비까지 구성되어 있어, 자동화 작업을 위해 인테리어 컨설팅 및 시공 업체와 함께 테스트해야 할 항목도 많았다.
+
+예를 들어 벽면 패드에서 예약 입장을 검증한 후 성공 API가 호출되면 
+동시에 해당 타석 룸 내부의 TV, 프로젝터, 카메라 센서, 에어컨 등이 정상적으로 동작하는지 꼼꼼하게 확인해야 했다.
+
+그리고 실내 매장에서 내가 별도로 확인해야 할 사항은 다음과 같았다.
+
+1. 입장 인증 및 출입문 제어
+ - 벽면 패드에서 이용자가 본인의 전화번호를 입력했을 때 정상적으로 입장이 가능
+ - 예약된 이용자가 아닐 경우 출입문이 열리지 않는지 확인
+2. 이용 연장 결제
+ - 스크린 골프 이용 중 벽면 패드를 통해 이용 연장 결제 및 크레딧 충전
+3. 매장 각 스크린 룸 현황 표시
+ - 각 스크린 룸의 이용 현황이 매장 로비 TV에 실시간으로 정상 표시
+
+![wall-pad](https://californialuv.github.io/Tech_Blog/images/2026-08-02/wall-pad-entry.gif)
+
+![room-pad](https://californialuv.github.io/Tech_Blog/images/2026-08-02/room-pad-reservation.gif)
+
+![DID](https://californialuv.github.io/Tech_Blog/images/2026-08-02/did.jpeg)
+*DID*
+
+<br>
+
+# 운영 후 시행착오
+
+### 갑자기 난입하는 다음 예약자 
+
+### 아예 몰라요 아예
+
+### 갑자기 왜 무인화가 된건가요?
+
+
+
