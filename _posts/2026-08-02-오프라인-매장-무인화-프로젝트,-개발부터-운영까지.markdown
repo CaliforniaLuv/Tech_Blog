@@ -400,7 +400,7 @@ ___WEB 배포 한 번___ 으로 전 매장 기기에 동시 반영되므로, 매
 
 ![실외 스크린 매장](https://californialuv.github.io/Tech_Blog/images/2026-08-02/outdoor-store.png)
 
-![키오스크](https://californialuv.github.io/Tech_Blog/images/2026-08-02/kiosk.jpeg)
+![키오스크](https://californialuv.github.io/Tech_Blog/images/2026-08-02/kiosk-2.jpeg)
 *키오스크 전면사진*
 
 실외 스크린 매장은 룸이라는 개념이 없어 키오스크만 설치하면 돠었다.
@@ -443,8 +443,8 @@ ___WEB 배포 한 번___ 으로 전 매장 기기에 동시 반영되므로, 매
 
 ![room-pad](https://californialuv.github.io/Tech_Blog/images/2026-08-02/room-pad-reservation.gif)
 
-![DID](https://californialuv.github.io/Tech_Blog/images/2026-08-02/did.jpeg)
-*DID*
+![DID](https://californialuv.github.io/Tech_Blog/images/2026-08-02/did-1.jpeg)
+*DID 매장 이용 현황 룸*
 
 <br>
 
