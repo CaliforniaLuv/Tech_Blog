@@ -390,11 +390,28 @@ ___WEB 배포 한 번___ 으로 전 매장 기기에 동시 반영되므로, 매
 
 패드에 만약 QR 인증이 필요할시 WebRTC Web API 를 통해 패드 전면 카메라를 인식하는 방식으로 운영된다.
 
+<br>
+
 # 최종 결과
+
+<br>
 
 ## 3-1 실외 스크린 골프장 시공 (2026-07-09)
 
 ![실외 스크린 매장](https://californialuv.github.io/Tech_Blog/images/2026-08-02/outdoor-store.png)
+
+![키오스크](https://californialuv.github.io/Tech_Blog/images/2026-08-02/kiosk.jpeg)
+
+
+실외 스크린 매장은 룸이라는 개념이 없어 키오스크만 설치하면 돠었다.
+
+키오스크를 통해 각 직영점 매장 선택이 가능하며 실시간 매장 타석을 선택하여 현장 예약이 가능하다.
+
+![키오스크-예약-1](https://californialuv.github.io/Tech_Blog/images/2026-08-02/payment-1.gif)
+
+![키오스크-예약-2](https://californialuv.github.io/Tech_Blog/images/2026-08-02/payment-2.gif)
+
+(무인화 설치 작업 중 찍은 영샹들 너무 밤티 감성이다;;)
 
 <br>
 
