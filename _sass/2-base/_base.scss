@@ -106,6 +106,9 @@ img,
     font-weight: normal;
     font-size: 14px;
     color: #888899;
+    &.caption-left {
+      text-align: left;
+    }
   }
 }
 
