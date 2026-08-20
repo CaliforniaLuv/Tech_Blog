@@ -399,6 +399,7 @@ __WEB 배포 한 번__ 으로 전 매장 기기에 동시 반영되므로, 매�
 ## 3-1 실외 스크린 골프장 시공 (2026-07-09)
 
 ![실외 스크린 매장](https://californialuv.github.io/Tech_Blog/images/2026-08-02/outdoor-store.png)
+*실외 스크린 배치도*
 
 ![키오스크](https://californialuv.github.io/Tech_Blog/images/2026-08-02/kiosk-3.jpeg)
 
@@ -417,11 +418,13 @@ __WEB 배포 한 번__ 으로 전 매장 기기에 동시 반영되므로, 매�
 ## 3-2 실내 스크린 골프장 시공 (2026-08-14)
 
 ![실내 스크린 매장](https://californialuv.github.io/Tech_Blog/images/2026-08-02/interior-store.png)
+*실내 스크린 배치도*
 
 ![pad](https://californialuv.github.io/Tech_Blog/images/2026-08-02/pad.png)
 *벽면 패드와 이용 현황 패드*
 
 ![DID](https://californialuv.github.io/Tech_Blog/images/2026-08-02/did-2.jpeg)
+*룸 이용 현황 안내 TV(DID)*{: .caption-left}
 
 실내 스크린 매장은 각 룸이 공간적으로 연결되어 있어, 이전에 진행했던 실외 매장보다 시공 과정에서 손봐야 할 부분이 확실히 많았다.
 
@@ -531,7 +534,7 @@ A 이용자가 이용을 종료한 후 다음 이용자의 12:00 전까지 남�
 # 마무리하며
 
 ![야구와블로그](https://californialuv.github.io/Tech_Blog/images/2026-08-02/baseball.gif)
-*삼성이 야구만 잘해도 편안하게 블로그 쓸텐데..*
+*삼성이 야구만 잘해도 편안하게 블로그 쓸텐데..*{: .caption-left}
 
 요 근래 이렇게 긴 글을 써본 건 정말 오랜만이다.
 
