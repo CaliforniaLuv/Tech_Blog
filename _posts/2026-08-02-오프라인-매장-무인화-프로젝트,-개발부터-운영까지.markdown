@@ -506,7 +506,7 @@ A 이용자가 이용을 종료한 후 다음 이용자의 12:00 전까지 남�
 
 ### 큰 제약이 걸린 환불 과정
 
-![아예 몰라요](https://californialuv.github.io/Tech_Blog/images/2026-08-02/idk.png)
+![환불문의](https://californialuv.github.io/Tech_Blog/images/2026-08-02/chat-2.png)
 
 무인화 운영과 VAN 결제 방식의 한계가 실제 환불 상황에서 드러나기 시작했다.
 
