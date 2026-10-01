@@ -54,7 +54,7 @@ IT와 IoT에 대한 다양한 지식이 복합적으로 요구될 것이라는 �
 
 <br>
 
-## 1-2 웹앱 기반으로 갈까? 네이티브로 갈까?
+## 1-2 WebView 기반 vs React Native 기반
 
 ![비교](https://californialuv.github.io/Tech_Blog/images/2026-08-02/versus.png)
 
@@ -149,7 +149,7 @@ export const KioskLayout = ({ children }: { children: ReactNode }) => {
 
 <br>
 
-### 예약 앱과 kicc 결제 앱 간 App to App 연동
+### 예약 앱과 KICC 결제 앱 간 App to App 연동
 
 이번 프로젝트에서 가장 어려웠던 부분은 결제 연동이었다.
 
@@ -169,7 +169,7 @@ startActivityForResult(call, intent, "paymentResult");
 
 {% endhighlight %}
 
-React(웹뷰)에서 이 네이티브 코드를 부를 수 있도록 Capacitor 커스텀 플러그인으로 감쌌고, 결제 앱이 돌려주는 응답의 결과 코드로 승인 성공 여부를 판정한다.
+React에서 이 네이티브 코드를 부를 수 있도록 Capacitor 커스텀 플러그인으로 감쌌고, 결제 앱이 돌려주는 응답의 결과 코드로 승인 성공 여부를 판정한다.
 
 {% highlight js %}
 
@@ -355,13 +355,13 @@ const pay = async (params: Params) => {
 ![배포 과정](https://californialuv.github.io/Tech_Blog/images/2026-08-02/app-web-deployment-process.png)
 *키오스크 기기 매뉴얼 안내*
 
-웹앱(WebView) 기반으로 운영되는 서비스이므로 배포는 APP과 WEB 두 갈래로 나뉜다.
+웹뷰(WebView) 기반으로 운영되는 서비스이므로 배포는 APP과 WEB 두 갈래로 나뉜다.
 
 먼저 앱 배포 절차는 수월한 편이었다. 빌드된 APK 파일과 버전 정보(versionName, versionCode)를 KICC 개발팀에 전달하면, 내부 심사를 거쳐 KICC 전용 스토어에 앱이 최종 등록되는 구조였다.
 
 반면 웹 배포는 CI/CD 파이프라인이 구축되어 있어, main 브랜치로 머지(Merge)되면 Vercel을 통해 자동으로 배포되는 구조다.
 
-이때 APK는 빌드 시 환경 변수로 주입된 Vercel 도메인을 웹뷰(WebView)로 원격 로드하는 방식이다.
+이때 APK는 빌드 시 환경 변수로 주입된 Vercel 도메인을 웹뷰로 원격 로드하는 방식이다.
 즉, APK는 패키징을 위한 네이티브 셸(Native Shell) 역할만 수행하고, 실제 서비스 화면은 항상 Vercel의 최신 배포본을 바라보도록 구현했다.
 
 덕분에 네이티브 SDK 영역(키오스크 화면 잠금, KICC 결제 연동 등)이 아닌 단순 UI 수정이나 API 연동 작업이라면, 
