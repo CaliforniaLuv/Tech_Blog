@@ -54,7 +54,7 @@ IT와 IoT에 대한 다양한 지식이 복합적으로 요구될 것이라는 �
 
 <br>
 
-## 1-2 WebView 기반 vs React Native 기반
+## 1-2 Capacitor와 React Native
 
 ![비교](https://californialuv.github.io/Tech_Blog/images/2026-08-02/versus.png)
 
