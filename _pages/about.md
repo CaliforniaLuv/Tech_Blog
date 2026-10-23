@@ -2,25 +2,15 @@
 layout: page
 title: About
 permalink: /about/
-image: profile.jpg
+image: myInfo.jpg
 ---
 
-Hi, my name is Alex Rodriguez. I like being at the center of events, being free and enjoying every moment. Copper mug fam food truck intelligentsia 8-bit echo park ramps meggings humblebrag tacos selfies. Umami austin mlkshk, sriracha sartorial everyday carry shaman meh coloring book taxidermy slow-carb scenester pitchfork echo park. Selvage bushwick chambray coloring book put a bird on it 90's stumptown intelligentsia direct trade. Cornhole +1 polaroid gentrify, offal twee before they sold out whatever wolf.
+React와 TypeScript를 주로 다루는 프론트엔드 개발자입니다.
+요즘은 AI를 개발 과정에 어떻게 녹여야 더 나은 서비스 품질로 이어질 수 있을지 고민하며 이것저것 시도해 보고 있습니다.
 
-***
+이 블로그는 개발하며 겪은 문제와 해결 과정, 그리고 프로젝트를 진행하며 느낀 경험들을 기록하는 공간입니다.
+가끔은 일상이나 여가 이야기 같은 라이프 스타일도 남겨 보려고 노력(?) 중입니다.
 
-#### Austin scenester...
-<small>2008 - 2018</small>
+수행한 프로젝트와 상세 이력은 아래 노션 페이지에 정리해 두었습니다.
 
-Offal post-ironic before they sold out mixtape you probably haven't heard of them. Pinterest roof party umami everyday carry street art. Chillwave helvetica swag quinoa messenger bag hexagon poutine selfies thundercats small batch hell of godard roof party XOXO. Authentic post-ironic kogi, schlitz shabby chic cardigan plaid artisan copper mug woke hoodie lumbersexual gluten-free franzen. Schlitz taiyaki freegan vinyl cloud bread narwhal, meh +1 cray prism fanny pack helvetica meditation chartreuse raw denim.
-
-#### Vinyl hexagon before...
-<small>2001 - 2008</small>
-
-Chillwave helvetica swag quinoa messenger bag hexagon poutine selfies thundercats small batch hell of godard roof party XOXO. Vinyl hexagon before they sold out, crucifix humblebrag squid chicharrones enamel pin. Iceland humblebrag farm-to-table, lyft pug tilde irony.
-Hot chicken shoreditch tousled listicle, actually meggings vape. Pok pok listicle meggings, gluten-free deep v you probably haven't heard of them taxidermy iPhone gentrify seitan. Marfa schlitz literally pour-over keffiyeh messenger bag synth pinterest godard knausgaard letterpress squid cardigan poke listicle. 
-
-#### La croix you probably...
-<small>1995 - 2000</small>
-
-Shoreditch activated charcoal iceland hexagon. Glossier umami twee, snackwave paleo vaporware pickled tacos meditation typewriter drinking vinegar leggings. Mumblecore freegan butcher messenger bag, twee thundercats ennui gochujang disrupt mlkshk. Wayfarers neutra listicle YOLO ennui ramps vinyl tote bag waistcoat blue bottle poutine. Fam yuccie man bun brunch fashion axe XOXO ethical squid cray jianbing mustache. Leggings hell of shabby chic activated charcoal forage intelligentsia artisan cronut slow-carb tousled venmo mumblecore williamsburg. Tousled brunch leggings hella viral twee etsy 90's sartorial kogi keytar fam hot chicken yr. Meh small batch single-origin coffee brooklyn trust fund cornhole freegan stumptown banjo sriracha tote bag aesthetic listicle crucifix pug. Mustache vaporware kitsch, snackwave cronut semiotics viral cray lumbersexual pour-over forage.
+[프로젝트 및 이력 보기 →](https://shiny-bowl-8f2.notion.site/1573b9f460de8007be20e33f02a17616)
